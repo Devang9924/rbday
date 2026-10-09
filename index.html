@@ -294,6 +294,7 @@
       transition: transform 0.4s;
     }
     .nav.hidden { transform: translateY(-100%); }
+    .nav-toggle-btn { display: none; }
     .progress-bg { width: 100%; height: 4px; background: #ffe0ea; }
     .progress-bar { height: 100%; width: 0; background: linear-gradient(90deg, #ff4f87, #ffd985); transition: width 0.3s; }
     .nav-controls {
@@ -467,6 +468,16 @@
       .nav-counter { font-size: 0.8rem; }
       .script { font-size: clamp(2rem, 8vw, 2.5rem); }
       .nav-controls { padding: 8px 4px; gap: 4px; }
+      .nav-toggle-btn {
+        display: flex; position: absolute;
+        bottom: calc(-44px - max(10px, env(safe-area-inset-top))); right: 15px;
+        width: 44px; height: 44px;
+        background: rgba(255,255,255,0.95); border: 2px solid #ffb6ce; border-radius: 50%;
+        box-shadow: 0 4px 10px rgba(255,79,135,0.3); color: #d93670;
+        font-size: 1.2rem; align-items: center; justify-content: center; cursor: pointer; z-index: -1;
+      }
+      .nav.hidden .nav-toggle-btn { display: none; }
+      .nav.collapsed { transform: translateY(-100%); }
     }
     @media(prefers-reduced-motion:reduce) {
       *, *:before, *:after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition: none !important }
@@ -477,6 +488,7 @@
 <body>
   <!-- Navigation Bar -->
   <div id="nav" class="nav hidden">
+    <button id="navToggleBtn" class="nav-toggle-btn" aria-label="Toggle Menu" onclick="toggleNav()">⬆️</button>
     <div class="progress-bg"><div class="progress-bar" id="progress"></div></div>
     <div class="nav-controls">
       <button class="nav-btn nav-btn-icon" onclick="prev()" aria-label="Previous">⟨ પાછા જાઓ</button>
@@ -800,6 +812,44 @@
       const counter = document.getElementById('counter');
       const nav = document.getElementById('nav');
       const pauseBtn = document.getElementById('pauseBtn');
+      const navToggleBtn = document.getElementById('navToggleBtn');
+      
+      // Nav Toggle Logic
+      let lastScrollY = window.scrollY || document.documentElement.scrollTop;
+      let navCollapsed = false;
+      
+      window.addEventListener('scroll', () => {
+        if (window.innerWidth > 600 || current === 0) return;
+        const currentScrollY = window.scrollY || document.documentElement.scrollTop;
+        
+        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+          if (!navCollapsed && currentScrollY - lastScrollY > 10) {
+            navCollapsed = true;
+            nav.classList.add('collapsed');
+            if(navToggleBtn) navToggleBtn.textContent = '⬇️';
+            lastScrollY = currentScrollY;
+          }
+        } 
+        else if (currentScrollY < lastScrollY) {
+          lastScrollY = currentScrollY;
+          if (currentScrollY <= 20 && navCollapsed) {
+            navCollapsed = false;
+            nav.classList.remove('collapsed');
+            if(navToggleBtn) navToggleBtn.textContent = '⬆️';
+          }
+        }
+      }, { passive: true });
+
+      window.toggleNav = function() {
+        navCollapsed = !navCollapsed;
+        if (navCollapsed) {
+          nav.classList.add('collapsed');
+          if(navToggleBtn) navToggleBtn.textContent = '⬇️';
+        } else {
+          nav.classList.remove('collapsed');
+          if(navToggleBtn) navToggleBtn.textContent = '⬆️';
+        }
+      };
       
       // Sound Manager
       let sfxOn = localStorage.getItem('rbday_sfx') === 'true';
@@ -1026,6 +1076,9 @@
           Sfx.play('chime');
         } else {
           nav.classList.remove('hidden');
+          nav.classList.remove('collapsed');
+          navCollapsed = false;
+          if(navToggleBtn) navToggleBtn.textContent = '⬆️';
           counter.textContent = `15 માંથી સરપ્રાઇઝ ${current}`;
           progress.style.width = `${(current / 15) * 100}%`;
           Sfx.play('pop');
