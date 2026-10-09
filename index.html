@@ -812,9 +812,11 @@
       let timerId = null;
       let isPaused = false;
       let isInteractive = false;
-      let timeLeft = 10000; // 10 seconds
+      let timeLeft = 20000;
       const TICK = 100;
-      const DURATION = 10000;
+      const DURATIONS = [
+        0, 20000, 25000, 20000, 20000, 45000, 25000, 20000, 45000, 25000, 25000, 30000, 30000, 30000, 60000, 0
+      ];
 
       // Variables for Kiss Rain & Counter
       let kissCount = parseInt(localStorage.getItem('rbday_kisses') || '0');
@@ -964,7 +966,7 @@
         isInteractive = screens[current].dataset.interactive === 'true';
         initScreen(current);
         
-        timeLeft = DURATION;
+        timeLeft = DURATIONS[current] || 20000;
         if (!isPaused && !isInteractive && current > 0 && current < 15) {
           startTimer();
         }
@@ -1063,7 +1065,7 @@
         document.getElementById('apologyBtn').style.display='none';
         document.getElementById('s3Next').classList.remove('hidden');
         confetti(40);
-        markDone(3000);
+        markDone(20000);
       };
 
       // S4 Teasing
@@ -1086,7 +1088,7 @@
             document.getElementById('quiz'+(q+1)).classList.remove('hidden');
           } else {
             document.getElementById('quizRes').classList.remove('hidden');
-            markDone(4000);
+            markDone(45000);
           }
         }
       };
@@ -1097,7 +1099,7 @@
         document.getElementById('propBtn').style.display='none';
         document.getElementById('propNext').classList.remove('hidden');
         kissRain(40);
-        markDone(4000);
+        markDone(25000);
       };
 
       // S7 Wish
@@ -1107,7 +1109,7 @@
         txt.textContent = '✨ તારી મનોકામના પૂરી થાય, Rutvi. બ્રહ્માંડને આજે Devang તરફથી થોડો વધારાનો પ્રેમ મળ્યો છે! 💗';
         txt.classList.remove('hidden');
         document.getElementById('wishNext').classList.remove('hidden');
-        confetti(55); markDone(4000);
+        confetti(55); markDone(20000);
       };
 
       // S9 Choco
@@ -1116,7 +1118,7 @@
         if(!box.classList.contains('open')) {
           box.classList.add('open');
           document.getElementById('chocoHint').classList.add('hidden');
-          setTimeout(() => { document.getElementById('chocoMsg').classList.remove('hidden'); confetti(40, ['🍫','🍪','🍩','🍫']); document.getElementById('chocoNext').classList.remove('hidden'); markDone(5000); }, 1000);
+          setTimeout(() => { document.getElementById('chocoMsg').classList.remove('hidden'); confetti(40, ['🍫','🍪','🍩','🍫']); document.getElementById('chocoNext').classList.remove('hidden'); markDone(25000); }, 1000);
         }
       };
 
@@ -1127,7 +1129,7 @@
           teddy.classList.add('hugging');
           document.getElementById('hugHeart').classList.remove('hidden');
           document.getElementById('hugBtn').style.display = 'none';
-          setTimeout(() => { document.getElementById('hugMsg').classList.remove('hidden'); confetti(30); document.getElementById('hugNext').classList.remove('hidden'); markDone(5000); }, 800);
+          setTimeout(() => { document.getElementById('hugMsg').classList.remove('hidden'); confetti(30); document.getElementById('hugNext').classList.remove('hidden'); markDone(25000); }, 800);
         }
       };
 
@@ -1144,7 +1146,7 @@
               document.getElementById('gardenFinalMsg').classList.remove('hidden');
               confetti(40, ['🌹','🥀','✨','❤️']);
               document.getElementById('roseNext').classList.remove('hidden');
-              markDone(5000);
+              markDone(30000);
             }, 800);
           }
         }
@@ -1157,7 +1159,7 @@
         document.getElementById('garbaMsg').classList.remove('hidden');
         confetti(50, ['✨','🎊','🎉','💖','💃']);
         document.getElementById('garbaNext').classList.remove('hidden');
-        markDone(6000);
+        markDone(30000);
       };
 
       // S13 Cake
@@ -1175,7 +1177,7 @@
               confetti(60);
               setTimeout(() => { 
                 document.getElementById('cakeNext').classList.remove('hidden');
-                markDone(6000); 
+                markDone(30000); 
               }, 1500);
             }, 500);
           }
@@ -1197,7 +1199,7 @@
       };
       function typeLetter2() {
         const el = document.getElementById('secretLetterText'); if(el.dataset.done) return; el.dataset.done='1';
-        let i = 0; function tick() { el.textContent = msg2.slice(0,i); i+=1; if(i<=msg2.length) tTimer2=setTimeout(tick,30); else { document.getElementById('skipTypingBtn').style.display='none'; document.getElementById('letterNext').classList.remove('hidden'); markDone(8000); } } tick();
+        let i = 0; function tick() { el.textContent = msg2.slice(0,i); i+=1; if(i<=msg2.length) tTimer2=setTimeout(tick,30); else { document.getElementById('skipTypingBtn').style.display='none'; document.getElementById('letterNext').classList.remove('hidden'); markDone(60000); } } tick();
       }
       window.skipTyping = function() {
         clearTimeout(tTimer2);
@@ -1206,7 +1208,7 @@
         el.textContent = msg2;
         document.getElementById('skipTypingBtn').style.display = 'none';
         document.getElementById('letterNext').classList.remove('hidden');
-        markDone(3000);
+        markDone(60000);
       };
 
       // S15 Finale
