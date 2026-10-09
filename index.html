@@ -324,9 +324,6 @@
     .nav-btn-icon { padding: 6px 10px; font-family: sans-serif; flex: 0 1 auto; } /* icons shouldn't use baloo */
 
     /* --- Kiss Rain & Animations --- */
-    .kiss-counter { position: fixed; top: 105px; right: 15px; background: rgba(255,255,255,0.95); border: 2px solid #ff4f87; border-radius: 20px; padding: 5px 12px; font-weight: bold; color: #ff4f87; font-size: 0.85rem; box-shadow: 0 4px 15px rgba(255,79,135,0.2); z-index: 90; display: flex; align-items: center; gap: 5px; opacity: 1; transition: transform 0.3s; font-family: 'Baloo Bhai 2', sans-serif;}
-    .kiss-counter.hidden { display: none !important; }
-    .kiss-badge { background: #ff4f87; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.9rem; transition: transform 0.2s; display: inline-block;}
     .kiss-toast { position: fixed; bottom: 30px; left: 50%; transform: translate(-50%, 100%); background: rgba(255,255,255,0.95); padding: 15px 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(255,79,135,0.3); color: #d93670; font-family: 'Baloo Bhai 2', sans-serif; font-size: 1.4rem; font-weight: bold; z-index: 110; opacity: 0; pointer-events: none; text-align: center; white-space: normal; max-width: 85vw; text-wrap: balance; transition: opacity 0.5s, transform 0.5s; border: 2px solid #ffb6ce;}
     .kiss-toast.show { opacity: 1; transform: translate(-50%, 0); }
     .kiss-btn { background: linear-gradient(135deg, #ff1744, #ff8a80); box-shadow: 0 8px 22px rgba(255,23,68,0.3); font-size: 1.1rem; margin: 10px 5px;}
@@ -469,7 +466,6 @@
       .nav-btn { padding: 8px 10px; font-size: 0.8rem; min-height: 40px; }
       .nav-counter { font-size: 0.8rem; }
       .script { font-size: clamp(2rem, 8vw, 2.5rem); }
-      .kiss-counter { top: auto; bottom: 100px; right: 15px; padding: 6px 12px; font-size: 0.85rem; }
       .nav-controls { padding: 8px 4px; gap: 4px; }
     }
     @media(prefers-reduced-motion:reduce) {
@@ -491,11 +487,6 @@
       <button class="nav-btn nav-btn-icon" id="soundBtn" onclick="toggleSound()" aria-label="Sound">🔊</button>
       <button class="nav-btn" onclick="next()">આગળ ⟩</button>
     </div>
-  </div>
-
-  <!-- Kiss Counter -->
-  <div class="kiss-counter hidden" id="kissCounter">
-    Devang તરફથી Rutvi માટે 💋 <span class="kiss-badge" id="kCount">0</span>
   </div>
 
   <div id="effects" aria-hidden="true"></div>
@@ -903,17 +894,10 @@
       // Variables for Kiss Rain & Counter
       let kissCount = parseInt(localStorage.getItem('rbday_kisses') || '0');
       let visitedSet = new Set(JSON.parse(localStorage.getItem('rbday_visited') || '[]'));
-      const kissCounterEl = document.getElementById('kissCounter');
-      const kCountEl = document.getElementById('kCount');
-      
-      kCountEl.textContent = kissCount;
 
       function addKiss() {
         kissCount++;
         localStorage.setItem('rbday_kisses', kissCount);
-        kCountEl.textContent = kissCount;
-        kCountEl.style.transform = 'scale(1.5)';
-        setTimeout(() => kCountEl.style.transform = 'scale(1)', 300);
       }
 
       function markVisited(n) {
@@ -1027,11 +1011,9 @@
         // Update Nav & Kisses
         if (current === 0) {
           nav.classList.add('hidden');
-          kissCounterEl.classList.add('hidden');
           Sfx.play('chime');
         } else {
           nav.classList.remove('hidden');
-          kissCounterEl.classList.remove('hidden');
           counter.textContent = `15 માંથી સરપ્રાઇઝ ${current}`;
           progress.style.width = `${(current / 15) * 100}%`;
           Sfx.play('pop');
