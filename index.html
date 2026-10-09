@@ -267,7 +267,7 @@
       position: fixed;
       top: -24px;
       left: var(--x);
-      z-index: 50;
+      z-index: 1;
       pointer-events: none;
       font-size: var(--size);
       animation: fall var(--dur) linear forwards
@@ -327,8 +327,8 @@
     .kiss-counter { position: fixed; top: 105px; right: 15px; background: rgba(255,255,255,0.95); border: 2px solid #ff4f87; border-radius: 20px; padding: 5px 12px; font-weight: bold; color: #ff4f87; font-size: 0.85rem; box-shadow: 0 4px 15px rgba(255,79,135,0.2); z-index: 90; display: flex; align-items: center; gap: 5px; opacity: 1; transition: transform 0.3s; font-family: 'Baloo Bhai 2', sans-serif;}
     .kiss-counter.hidden { display: none !important; }
     .kiss-badge { background: #ff4f87; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.9rem; transition: transform 0.2s; display: inline-block;}
-    .kiss-toast { position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,255,255,0.95); padding: 15px 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(255,79,135,0.3); color: #d93670; font-family: 'Baloo Bhai 2', sans-serif; font-size: 1.4rem; font-weight: bold; z-index: 80; opacity: 0; pointer-events: none; text-align: center; white-space: normal; max-width: 85vw; text-wrap: balance; transition: opacity 0.5s, transform 0.5s; border: 2px solid #ffb6ce;}
-    .kiss-toast.show { opacity: 1; transform: translate(-50%, -60%); }
+    .kiss-toast { position: fixed; bottom: 30px; left: 50%; transform: translate(-50%, 100%); background: rgba(255,255,255,0.95); padding: 15px 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(255,79,135,0.3); color: #d93670; font-family: 'Baloo Bhai 2', sans-serif; font-size: 1.4rem; font-weight: bold; z-index: 110; opacity: 0; pointer-events: none; text-align: center; white-space: normal; max-width: 85vw; text-wrap: balance; transition: opacity 0.5s, transform 0.5s; border: 2px solid #ffb6ce;}
+    .kiss-toast.show { opacity: 1; transform: translate(-50%, 0); }
     .kiss-btn { background: linear-gradient(135deg, #ff1744, #ff8a80); box-shadow: 0 8px 22px rgba(255,23,68,0.3); font-size: 1.1rem; margin: 10px 5px;}
     
     .couple-scene { display: flex; justify-content: center; align-items: center; gap: 40px; margin: 20px 0; height: 100px; position: relative; }
@@ -460,16 +460,17 @@
       .list { grid-template-columns: 1fr 1fr }
       .moment { min-height: 112px }
     }
-    @media(max-width:360px) {
-      .screen { padding: 115px 10px 22px }
-      .btn { padding: 12px 14px; font-size: .95rem }
-      .card { padding: 15px 12px }
-      .lead { line-height: 1.6; font-size: 0.95rem; }
-      .eyebrow { letter-spacing: 1px }
-      .nav-btn { padding: 6px 8px; font-size: 0.75rem; min-height: 36px; }
-      .nav-counter { font-size: 0.75rem; }
-      .script { font-size: clamp(1.8rem, 8vw, 2.5rem); }
-      .kiss-counter { top: 115px; right: 10px; padding: 4px 8px; font-size: 0.75rem; }
+    @media(max-width:600px) {
+      .screen { padding: 140px 15px 120px; overflow-y: auto; }
+      .btn { padding: 12px 16px; font-size: 1rem; }
+      .card { padding: 15px 15px; }
+      .lead { line-height: 1.6; font-size: 1rem; }
+      .eyebrow { letter-spacing: 1px; }
+      .nav-btn { padding: 8px 10px; font-size: 0.8rem; min-height: 40px; }
+      .nav-counter { font-size: 0.8rem; }
+      .script { font-size: clamp(2rem, 8vw, 2.5rem); }
+      .kiss-counter { top: auto; bottom: 100px; right: 15px; padding: 6px 12px; font-size: 0.85rem; }
+      .nav-controls { padding: 8px 4px; gap: 4px; }
     }
     @media(prefers-reduced-motion:reduce) {
       *, *:before, *:after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition: none !important }
@@ -938,21 +939,24 @@
       ];
 
       function showKissToast(container) {
+        document.querySelectorAll('.kiss-toast').forEach(el => el.remove());
         const t = document.createElement('div');
         t.className = 'kiss-toast';
         t.textContent = toastMessages[Math.floor(Math.random() * toastMessages.length)];
-        container.appendChild(t);
+        document.body.appendChild(t);
         setTimeout(() => t.classList.add('show'), 100);
         setTimeout(() => { 
-          t.classList.remove('show'); 
-          setTimeout(() => t.remove(), 500); 
+          if(t.parentNode) {
+            t.classList.remove('show'); 
+            setTimeout(() => { if(t.parentNode) t.remove(); }, 500); 
+          }
         }, 3500);
       }
 
       window.kissRain = function(count) {
         if (reduce) return;
         Sfx.play('kiss');
-        const max = Math.min(count, 80);
+        const max = Math.min(count, window.innerWidth <= 600 ? 10 : 80);
         const emojis = ['😘', '💋', '💖', '❤️', '🥰'];
         for (let i = 0; i < max; i++) {
           const el = document.createElement('span');
@@ -962,7 +966,7 @@
           el.style.setProperty('--size', (18 + Math.random() * 20) + 'px');
           el.style.setProperty('--dur', (3 + Math.random() * 2.5) + 's');
           document.body.appendChild(el);
-          setTimeout(() => el.remove(), 6000);
+          setTimeout(() => { if (el.parentNode) el.remove(); }, 6000);
         }
       }
 
@@ -1107,13 +1111,13 @@
 
       window.confetti = function (count, charsList) {
         if (reduce) return;
-        const max = Math.min(count, 80);
+        const max = Math.min(count, window.innerWidth <= 600 ? 10 : 80);
         const chars = charsList || ['💗', '💖', '💕', '✨', '🌸', '♥', '💘'];
         for (let i = 0; i < max; i++) {
           const e = document.createElement('span'); e.className = 'confetti'; e.textContent = chars[(Math.random() * chars.length) | 0];
           e.style.setProperty('--x', Math.random() * 100 + 'vw'); e.style.setProperty('--size', (14 + Math.random() * 12) + 'px'); 
           e.style.setProperty('--dur', (2.5 + Math.random() * 2.8) + 's');
-          document.body.appendChild(e); setTimeout(() => e.remove(), 5600);
+          document.body.appendChild(e); setTimeout(() => { if(e.parentNode) e.remove(); }, 5600);
         }
       };
 
