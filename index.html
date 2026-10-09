@@ -1,12 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="gu">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#ff4f87">
-  <meta name="description" content="A little birthday universe made with love for Rutvi, from Devang.">
+  <meta name="description" content="A cinematic birthday universe made with love for Rutvi, from Devang.">
   <title>For Rutvi 💗 — From Devang</title>
   <style>
+    @font-face {
+      font-family: 'Baloo Bhai 2';
+      src: url('./assets/fonts/BalooBhai2-Regular.ttf') format('truetype');
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+    }
+
     :root {
       --pink: #ff4f87;
       --rose: #ffb6ce;
@@ -29,7 +37,7 @@
       min-height: 100svh;
       background: radial-gradient(ellipse at 15% 15%, #ffe0eb 0, transparent 42%), radial-gradient(ellipse at 90% 80%, #ffe7d9 0, transparent 40%), linear-gradient(145deg, #fff8fb, #fff0f6);
       color: var(--ink);
-      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-family: 'Baloo Bhai 2', sans-serif;
       overflow-x: hidden;
       transition: background 2s, color 2s;
     }
@@ -68,19 +76,19 @@
     }
 
     .script {
-      font-family: "Brush Script MT", "Segoe Script", cursive;
+      font-family: 'Baloo Bhai 2', sans-serif;
       font-weight: 700;
       color: #e83d79;
-      font-size: clamp(2.7rem, 12vw, 5.3rem);
-      line-height: 1.02;
+      font-size: clamp(2.3rem, 10vw, 4.5rem);
+      line-height: 1.1;
       margin: 13px 0 17px;
       text-wrap: balance
     }
     .finale-mode .script { color: #ff83ad; text-shadow: 0 0 10px rgba(255,131,173,0.5); }
 
     .eyebrow {
-      font-size: .68rem;
-      letter-spacing: 2px;
+      font-size: .75rem;
+      letter-spacing: 1px;
       text-transform: uppercase;
       color: #b55a80;
       font-weight: 800
@@ -88,7 +96,7 @@
     .finale-mode .eyebrow { color: #ffb6ce; }
 
     .lead {
-      font-size: clamp(.96rem, 3.8vw, 1.08rem);
+      font-size: clamp(.96rem, 3.8vw, 1.1rem);
       line-height: 1.8;
       color: var(--muted);
       max-width: 540px;
@@ -166,10 +174,10 @@
     }
 
     .chapter {
-      font-size: .76rem;
+      font-size: .8rem;
       color: #bc6688;
       font-weight: 800;
-      letter-spacing: 1.4px;
+      letter-spacing: 1.2px;
       text-transform: uppercase
     }
 
@@ -200,7 +208,7 @@
       text-align: left;
       line-height: 1.9;
       color: #78455e;
-      font-size: 1rem;
+      font-size: 1.05rem;
       min-height: 180px
     }
 
@@ -211,10 +219,10 @@
       filter: drop-shadow(0 8px 16px #ff6b9b48)
     }
 
-    .footer { font-size: .78rem; color: #b47a92; margin-top: 20px }
+    .footer { font-size: .85rem; color: #b47a92; margin-top: 20px }
     .finale-mode .footer { color: #a18e9a; }
     
-    .tap-note { font-size: .78rem; color: #b47a92; margin-top: 14px }
+    .tap-note { font-size: .85rem; color: #b47a92; margin-top: 14px }
     .ring { display: inline-block; animation: ring 2.8s ease-in-out infinite }
     .hidden { display: none !important }
 
@@ -257,7 +265,7 @@
 
     #response {
       min-height: 45px;
-      font-family: "Brush Script MT", "Segoe Script", cursive;
+      font-family: 'Baloo Bhai 2', sans-serif;
       color: #e83d79;
       font-size: 2rem;
       margin: 12px 0
@@ -298,8 +306,8 @@
       white-space: nowrap;
     }
     .nav-btn:active { transform: scale(0.95); }
-    .nav-counter { font-size: 0.75rem; color: #a35b7a; font-weight: bold; }
-    .nav-btn-icon { padding: 6px 10px; }
+    .nav-counter { font-size: 0.8rem; color: #a35b7a; font-weight: bold; }
+    .nav-btn-icon { padding: 6px 10px; font-family: sans-serif; } /* icons shouldn't use baloo */
 
     /* --- Animations --- */
     @keyframes screenIn { from { opacity: 0; transform: translateY(13px) scale(.99) } to { opacity: 1; transform: none } }
@@ -387,7 +395,7 @@
     .wax-seal { position: absolute; top: 65px; left: 90px; width: 40px; height: 40px; background: #c21a30; border-radius: 50%; z-index: 4; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; box-shadow: 0 4px 10px rgba(194, 26, 48, 0.5); }
     .env-container.open .env-flap { transform: rotateX(180deg); z-index: 1; }
     .env-container.open .wax-seal { opacity: 0; transition: opacity 0.3s; }
-    .secret-paper { width: 90%; max-width: 500px; background: #fffcf0; margin: -100px auto 0; border-radius: 5px; padding: 30px 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); position: relative; z-index: 1; max-height: 0; overflow: hidden; transition: max-height 2s ease, margin-top 2s ease; opacity: 0; font-family: "Courier New", monospace; color: #5c3222; text-align: left;}
+    .secret-paper { width: 90%; max-width: 500px; background: #fffcf0; margin: -100px auto 0; border-radius: 5px; padding: 30px 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); position: relative; z-index: 1; max-height: 0; overflow: hidden; transition: max-height 2s ease, margin-top 2s ease; opacity: 0; font-family: 'Baloo Bhai 2', sans-serif; color: #5c3222; text-align: left;}
     .secret-paper.open { max-height: 1500px; margin-top: 20px; opacity: 1; z-index: 6; overflow: visible;}
     
     /* S15 Finale */
@@ -398,7 +406,7 @@
     .tap-hint { color: #ffb6ce; font-size: 1.2rem; font-weight: bold; animation: pulseOpacity 2s infinite; letter-spacing: 2px;}
     .finale-heart-container.expand { transform: translate(-50%, -50%) scale(50); opacity: 0; pointer-events: none; }
     .finale-texts { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 30; gap: 20px; padding: 20px;}
-    .f-text { font-family: "Brush Script MT", cursive; font-size: clamp(2rem, 8vw, 3.5rem); color: #fff; text-shadow: 0 0 20px #ff4f87; opacity: 0; transition: opacity 1.5s, transform 1.5s; transform: translateY(20px); text-align: center; margin: 10px 0;}
+    .f-text { font-family: 'Baloo Bhai 2', sans-serif; font-size: clamp(1.8rem, 7vw, 3.2rem); color: #fff; text-shadow: 0 0 20px #ff4f87; opacity: 0; transition: opacity 1.5s, transform 1.5s; transform: translateY(20px); text-align: center; margin: 5px 0;}
     .f-text.visible { opacity: 1; transform: translateY(0); }
     .f-btn { opacity: 0; transition: opacity 1s; margin-top: 40px; transform: scale(1.2); }
     .f-btn.visible { opacity: 1; }
@@ -411,11 +419,11 @@
     }
     @media(max-width:360px) {
       .screen { padding: 66px 13px 22px }
-      .btn { padding: 12px 16px; font-size: .92rem }
+      .btn { padding: 12px 16px; font-size: .95rem }
       .card { padding: 19px 15px }
       .lead { line-height: 1.7 }
       .eyebrow { letter-spacing: 1.2px }
-      .nav-btn { padding: 5px 8px; font-size: 0.65rem; }
+      .nav-btn { padding: 5px 8px; font-size: 0.75rem; }
     }
     @media(prefers-reduced-motion:reduce) {
       *, *:before, *:after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition: none !important }
@@ -428,12 +436,12 @@
   <div id="nav" class="nav hidden">
     <div class="progress-bg"><div class="progress-bar" id="progress"></div></div>
     <div class="nav-controls">
-      <button class="nav-btn nav-btn-icon" onclick="prev()" aria-label="Previous">⟨</button>
-      <button class="nav-btn" id="pauseBtn" onclick="togglePause()">Pause ⏸</button>
-      <span class="nav-counter" id="counter">Surprise 1 of 15</span>
-      <button class="nav-btn nav-btn-icon" onclick="replayCurrent()" aria-label="Replay">↺</button>
+      <button class="nav-btn nav-btn-icon" onclick="prev()" aria-label="Previous">⟨ પાછા જાઓ</button>
+      <button class="nav-btn" id="pauseBtn" onclick="togglePause()">થોભો ⏸</button>
+      <span class="nav-counter" id="counter">15 માંથી સરપ્રાઇઝ 1</span>
+      <button class="nav-btn nav-btn-icon" onclick="replayCurrent()" aria-label="Replay">↺ ફરીથી જુઓ</button>
       <button class="nav-btn nav-btn-icon" id="musicBtn" onclick="toggleMusic()" aria-label="Music">♫</button>
-      <button class="nav-btn" onclick="next()">Next ⟩</button>
+      <button class="nav-btn" onclick="next()">આગળ ⟩</button>
     </div>
   </div>
 
@@ -443,144 +451,144 @@
   <!-- Intro Screen (Screen 0) -->
   <section class="screen active" data-n="0">
     <div class="inner">
-      <div class="eyebrow">A cinematic journey begins</div>
+      <div class="eyebrow">એક સુંદર સફરની શરૂઆત</div>
       <div class="big-heart" style="margin-bottom: 20px;">💖</div>
-      <h1 class="script">Happy Birthday,<br>My Rutvi ❤️</h1>
-      <p class="lead">Someone special has prepared 15 little surprises just for you...</p>
-      <p class="lead" style="font-weight: bold; color: #b55a80;">From Devang, with love 💌</p>
-      <button class="btn" onclick="next()" style="margin-top: 20px; font-size: 1.2rem; padding: 15px 30px;">Start Our Journey ❤️</button>
-      <div class="tap-note">🎀 Turn on sound and grab a comfy seat</div>
+      <h1 class="script">Happy Birthday,<br>મારી વહાલી Rutvi ❤️</h1>
+      <p class="lead">આજે તારા માટે પ્રેમથી ભરેલી ઘણી બધી સરપ્રાઇઝ તૈયાર કરી છે...</p>
+      <p class="lead" style="font-weight: bold; color: #b55a80;">ફક્ત તારા માટે, તારા Devang તરફથી 💌</p>
+      <button class="btn" onclick="next()" style="margin-top: 20px; font-size: 1.2rem; padding: 15px 30px;">ચાલ, આપણી સરપ્રાઇઝની સફર શરૂ કરીએ ❤️</button>
+      <div class="tap-note">🎀 અવાજ ચાલુ કર અને આરામથી બેસ</div>
     </div>
   </section>
 
   <!-- Surprise 1: Original Intro -->
   <section class="screen" data-n="1">
     <div class="inner">
-      <div class="eyebrow">surprise 01 · a little universe made just for Rutvi ✨</div>
+      <div class="eyebrow">સરપ્રાઇઝ 01 · ફક્ત Rutvi માટે બનાવેલી એક નાનકડી દુનિયા ✨</div>
       <div class="envelope">💌</div>
-      <h1 class="script">Hey, Rutvi Jaan!</h1>
-      <p class="lead">Psst… Devang has a little surprise for the most special girl in his world. 💗<br>Take a deep breath, smile a little, and open your birthday magic…</p>
-      <button class="btn" onclick="next()">Open your surprise 💖</button>
-      <div class="footer">Made with all my heart by Devang ♡</div>
+      <h1 class="script">હેલો, Rutvi જાન!</h1>
+      <p class="lead">સાંભળ… Devang પાસે તેની દુનિયાની સૌથી ખાસ છોકરી માટે એક નાનકડી સરપ્રાઇઝ છે. 💗<br>એક ઊંડો શ્વાસ લે, થોડું મલકાઈ જા, અને તારા જન્મદિવસનો જાદુ ખોલ…</p>
+      <button class="btn" onclick="next()">તારી સરપ્રાઇઝ ખોલ 💖</button>
+      <div class="footer">Devang દ્વારા પૂરા દિલથી બનાવેલ ♡</div>
     </div>
   </section>
 
   <!-- Surprise 2: Original Ch 1 -->
   <section class="screen" data-n="2">
     <div class="inner card">
-      <div class="chapter">surprise 02 · your day, your magic</div>
+      <div class="chapter">સરપ્રાઇઝ 02 · તારો દિવસ, તારો જાદુ</div>
       <div class="script">Happy Birthday,<br>Rutvi! 🎂</div>
       <div class="photo-frame" aria-label="A heart for Rutvi">🎀💗</div>
-      <p class="lead">On this day, the world became more beautiful because <b>you</b> arrived in it. And somewhere along the way, my world became more beautiful because I got you in it. 🌷</p>
-      <p class="lead">Today, every little sparkle is for you, every heart says your name, and every wish I make has a little bit of <b>Rutvi</b> in it. ✨</p>
-      <button class="btn" onclick="next()">Keep opening, Jaan →</button>
+      <p class="lead">આ દિવસે, દુનિયા વધુ સુંદર બની ગઈ કારણ કે <b>તું</b> અહીં આવી. અને ક્યાંક રસ્તામાં, મારી દુનિયા વધુ સુંદર બની ગઈ કારણ કે મને તું મળી. 🌷</p>
+      <p class="lead">આજે, દરેક નાનકડી ચમક તારા માટે છે, દરેક હૃદય તારું નામ લે છે, અને મારી દરેક મનોકામનામાં થોડીક <b>Rutvi</b> છે. ✨</p>
+      <button class="btn" onclick="next()">આગળ જોતી રહે, જાન →</button>
     </div>
   </section>
 
   <!-- Surprise 3: Original Ch 2 -->
   <section class="screen" data-n="3">
     <div class="inner">
-      <div class="chapter">surprise 03 · my favourite things</div>
-      <h2 class="script">Why you're so special 💕</h2>
+      <div class="chapter">સરપ્રાઇઝ 03 · મારી મનપસંદ વાતો</div>
+      <h2 class="script">તું કેમ આટલી ખાસ છે 💕</h2>
       <div class="list">
-        <div class="moment">🌸 <b>Your smile</b><br>It makes even an ordinary day feel like my favourite day.</div>
-        <div class="moment">🥹 <b>Your eyes</b><br>They have a way of making me forget what I was about to say.</div>
-        <div class="moment">🫶 <b>Your heart</b><br>Your kindness and your little ways mean more than you know.</div>
-        <div class="moment">😂 <b>Your silly side</b><br>The laughs, the teasing, the tiny moments I wish I could replay.</div>
-        <div class="moment">💗 <b>Simply you</b><br>You don't have to be perfect to be precious to me. You just have to be Rutvi.</div>
+        <div class="moment">🌸 <b>તારું સ્મિત</b><br>તે સામાન્ય દિવસને પણ મારો સૌથી પ્રિય દિવસ બનાવી દે છે.</div>
+        <div class="moment">🥹 <b>તારી આંખો</b><br>તે મને હું શું કહેવાનો હતો તે ભૂલાવી દે છે.</div>
+        <div class="moment">🫶 <b>તારું હૃદય</b><br>તારી ભલાઈ અને તારી નાની નાની વાતો મારા માટે બહુ જ અર્થપૂર્ણ છે.</div>
+        <div class="moment">😂 <b>તારી રમુજી વાતો</b><br>હાસ્ય, મસ્તી અને એ નાની પળો જે હું ફરીથી જીવવા માંગુ છું.</div>
+        <div class="moment">💗 <b>ફક્ત તું</b><br>મારા માટે ખાસ બનવા તારે સંપૂર્ણ થવાની જરૂર નથી. તારે બસ Rutvi બનવાની જરૂર છે.</div>
       </div>
-      <button class="btn" onclick="next()">There's more, my love 💌</button>
+      <button class="btn" onclick="next()">હજુ ઘણું બધું છે, મારી જાન 💌</button>
     </div>
   </section>
 
   <!-- Surprise 4: Original Ch 3 (Interactive Typing) -->
   <section class="screen" data-n="4" data-interactive="true">
     <div class="inner card">
-      <div class="chapter">surprise 04 · a message from Devang</div>
-      <h2 class="script">Open my heart 💌</h2>
+      <div class="chapter">સરપ્રાઇઝ 04 · Devang તરફથી એક સંદેશ</div>
+      <h2 class="script">મારું દિલ ખોલ 💌</h2>
       <p class="letter" id="letter1"></p>
-      <button class="btn" onclick="next()">I have more to tell you →</button>
+      <button class="btn" onclick="next()">મારે તને હજુ ઘણું કહેવું છે →</button>
     </div>
   </section>
 
   <!-- Surprise 5: Original Ch 4 -->
   <section class="screen" data-n="5">
     <div class="inner">
-      <div class="chapter">surprise 05 · little promises</div>
-      <h2 class="script">For you, Rutvi 🤞</h2>
+      <div class="chapter">સરપ્રાઇઝ 05 · નાનકડા વચનો</div>
+      <h2 class="script">તારા માટે, Rutvi 🤞</h2>
       <div class="list">
-        <div class="moment">🌧️ To listen when you need someone, even when you don't know how to explain.</div>
-        <div class="moment">🌈 To celebrate your wins like they're my own and remind you of your strength on hard days.</div>
-        <div class="moment">🧸 To keep making silly memories, sharing smiles, and finding reasons to laugh together.</div>
-        <div class="moment">🌷 To respect your feelings, support your dreams, and never take your beautiful heart for granted.</div>
-        <div class="moment">💞 To keep choosing kindness, honesty, and us—one little moment at a time.</div>
+        <div class="moment">🌧️ જ્યારે તને કોઈની જરૂર હોય ત્યારે સાંભળવા, ભલે તને સમજાવતા ન આવડતું હોય.</div>
+        <div class="moment">🌈 તારી જીતને મારી જીત સમજીને ઉજવવા અને મુશ્કેલ દિવસોમાં તને તારી તાકાત યાદ અપાવવા.</div>
+        <div class="moment">🧸 રમુજી યાદો બનાવતા રહેવા, સ્મિત વહેંચવા અને સાથે હસવાના કારણો શોધવા.</div>
+        <div class="moment">🌷 તારી લાગણીઓનું સન્માન કરવા, તારા સપનાઓને સાથ આપવા અને તારા સુંદર હૃદયની કદર કરવા.</div>
+        <div class="moment">💞 હંમેશાં ભલાઈ, પ્રામાણિકતા અને આપણા સંબંધને પસંદ કરવા—દરેક નાની પળમાં.</div>
       </div>
-      <button class="btn" onclick="next()">Next Surprise ✨</button>
+      <button class="btn" onclick="next()">આગળની સરપ્રાઇઝ ✨</button>
     </div>
   </section>
 
   <!-- Surprise 6: Original Ch 5 (Interactive Wish) -->
   <section class="screen" data-n="6" data-interactive="true">
     <div class="inner card">
-      <div class="chapter">surprise 06 · a tiny wish</div>
-      <div class="script">Make a wish, Rutvi 🌠</div>
+      <div class="chapter">સરપ્રાઇઝ 06 · એક નાનકડી મનોકામના</div>
+      <div class="script">એક સરસ મનોકામના કર, Rutvi 🌠</div>
       <div class="envelope">🎁</div>
-      <p class="lead">Close your eyes for a second, make your sweetest birthday wish, and tap below to send a sky full of love your way.</p>
-      <button class="btn" id="wishBtn" onclick="makeWish()">Send my wish ✨💗</button>
+      <p class="lead">એક સેકન્ડ માટે તારી આંખો બંધ કર, તારા જન્મદિવસની સૌથી સુંદર મનોકામના માંગ, અને આસમાન ભરીને પ્રેમ મેળવવા નીચે દબાવ.</p>
+      <button class="btn" id="wishBtn" onclick="makeWish()">મારી મનોકામના મોકલ ✨💗</button>
       <p id="wishText" class="lead hidden" aria-live="polite"></p>
-      <button class="btn alt" onclick="next()">And now… →</button>
+      <button class="btn alt" onclick="next()">અને હવે… →</button>
     </div>
   </section>
 
   <!-- Surprise 7: Original Ch 6 (Interactive Question) -->
   <section class="screen" data-n="7" data-interactive="true">
     <div class="inner">
-      <div class="chapter">surprise 07 · one little question</div>
+      <div class="chapter">સરપ્રાઇઝ 07 · એક નાનકડો પ્રશ્ન</div>
       <div class="big-heart">💖</div>
-      <h2 class="script">Rutvi, will you make many more beautiful memories with me?</h2>
-      <p class="lead">More laughter, more late conversations, more tiny adventures, more support for each other's dreams, and more days where we give each other a reason to smile. 💞</p>
+      <h2 class="script">Rutvi, શું તું મારી સાથે હજી ઘણી બધી સુંદર યાદો બનાવીશ?</h2>
+      <p class="lead">વધુ હાસ્ય, રાતની લાંબી વાતો, નાના પ્રવાસો, એકબીજાના સપનાઓ માટે સાથ, અને એવા ઘણા દિવસો જ્યાં આપણે એકબીજાને હસવાનું કારણ આપીએ. 💞</p>
       <div id="qBtns">
-        <button class="btn" onclick="answerQ('yes')">Of course, Devang! 💘</button>
-        <button class="btn alt" onclick="answerQ('shy')">I'm shy 🙈</button>
+        <button class="btn" onclick="answerQ('yes')">હા ચોક્કસ, Devang! 💘</button>
+        <button class="btn alt" onclick="answerQ('shy')">મને શરમ આવે છે 🙈</button>
       </div>
-      <p id="responseQ" aria-live="polite" class="script hidden" style="font-size: 2rem;"></p>
-      <button class="btn alt hidden" id="qNext" onclick="next()">Next Surprise ➜</button>
+      <p id="responseQ" aria-live="polite" class="script hidden" style="font-size: 2.5rem;"></p>
+      <button class="btn alt hidden" id="qNext" onclick="next()">આગળની સરપ્રાઇઝ ➜</button>
     </div>
   </section>
 
   <!-- Surprise 8: Original Ch 7 (Old Finale, Now Middle) -->
   <section class="screen" data-n="8">
     <div class="inner card">
-      <div class="chapter">surprise 08 · made with love</div>
-      <div class="script">Happy Birthday,<br>My Rutvi! 🎂</div>
+      <div class="chapter">સરપ્રાઇઝ 08 · પ્રેમથી બનાવેલ</div>
+      <div class="script">Happy Birthday,<br>મારી વહાલી Rutvi! 🎂</div>
       <div class="big-heart">❤️</div>
-      <p class="lead">I hope this year brings you peace when you need it, courage when things feel hard, people who celebrate your light, and a thousand little reasons to smile.</p>
-      <h2 class="script" style="font-size:clamp(2.5rem,8vw,3.5rem)">You are my favourite hello, my sweetest thought, and a very special part of my heart. 💗</h2>
-      <p class="lead"><b>With all my love, today and always — Devang. 💌</b></p>
-      <button class="btn" onclick="next()">Keep going, there's more! ➜</button>
+      <p class="lead">આશા છે કે આ વર્ષે જ્યારે તને શાંતિની જરૂર હોય ત્યારે શાંતિ મળે, મુશ્કેલ સમયમાં હિંમત મળે, એવા લોકો મળે જે તારા પ્રકાશની કદર કરે અને હસવાના હજારો નાના કારણો મળે.</p>
+      <h2 class="script" style="font-size:clamp(2rem,7vw,3.2rem)">તું મારું સૌથી મનપસંદ સ્વાગત છે, મારો સૌથી સુંદર વિચાર છે અને મારા હૃદયનો એક ખૂબ જ ખાસ હિસ્સો છે. 💗</h2>
+      <p class="lead"><b>આજે અને હંમેશાં ખૂબ બધા પ્રેમ સાથે — Devang. 💌</b></p>
+      <button class="btn" onclick="next()">આગળ વધતી રહે, હજુ ઘણું બધું છે! ➜</button>
     </div>
   </section>
 
   <!-- Surprise 9: Chocolate Wonderland -->
   <section class="screen" data-n="9" data-interactive="true">
     <div class="inner card">
-      <div class="chapter">surprise 09 · Chocolate Wonderland 🍫</div>
+      <div class="chapter">સરપ્રાઇઝ 09 · ચોકલેટની દુનિયા 🍫</div>
       <div class="choco-scene">
         <div class="c-box" onclick="openChocoBox()">
           <div class="c-lid">🎁</div>
           <div class="c-body">💝</div>
         </div>
-        <div id="chocoMsg" class="hidden script" style="margin-top:30px; font-size:2.5rem;">Life becomes sweeter with you, Rutvi ❤️</div>
+        <div id="chocoMsg" class="hidden script" style="margin-top:30px; font-size:2.8rem;">તારી સાથે જિંદગી મીઠી બની જાય છે, Rutvi ❤️</div>
       </div>
-      <p class="lead tap-note">Tap the box to open your sweet surprise</p>
-      <button class="btn alt hidden" id="chocoNext" onclick="next()">Next Surprise ➜</button>
+      <p class="lead tap-note">તારી મીઠી સરપ્રાઇઝ ખોલવા માટે બોક્સ પર દબાવ</p>
+      <button class="btn alt hidden" id="chocoNext" onclick="next()">આગળની સરપ્રાઇઝ ➜</button>
     </div>
   </section>
 
   <!-- Surprise 10: Teddy Bear Hug -->
   <section class="screen" data-n="10" data-interactive="true">
     <div class="inner">
-      <div class="chapter">surprise 10 · Teddy Bear Hug 🧸</div>
+      <div class="chapter">સરપ્રાઇઝ 10 · ટેડી બિયર હગ 🧸</div>
       <div class="teddy-scene">
         <div class="css-teddy" onclick="giveHug()">
           <div class="teddy-ear left"></div><div class="teddy-ear right"></div>
@@ -591,32 +599,32 @@
           <div class="hug-heart hidden" id="hugHeart">❤️</div>
         </div>
       </div>
-      <button class="btn" id="hugBtn" onclick="giveHug()">Tap for a Hug 🤗</button>
-      <div id="hugMsg" class="hidden script" style="margin-top:20px; font-size:2.2rem;">A big virtual hug from Devang to Rutvi 🤗</div>
-      <button class="btn alt hidden" id="hugNext" onclick="next()">Next Surprise ➜</button>
+      <button class="btn" id="hugBtn" onclick="giveHug()">ગળે મળવા અહીં દબાવો 🤗</button>
+      <div id="hugMsg" class="hidden script" style="margin-top:20px; font-size:2.5rem;">Devang તરફથી Rutvi ને એક મોટું વર્ચ્યુઅલ હગ 🤗</div>
+      <button class="btn alt hidden" id="hugNext" onclick="next()">આગળની સરપ્રાઇઝ ➜</button>
     </div>
   </section>
 
   <!-- Surprise 11: Romantic Rose Garden -->
   <section class="screen" data-n="11" data-interactive="true">
     <div class="inner card">
-      <div class="chapter">surprise 11 · Romantic Rose Garden 🌹</div>
+      <div class="chapter">સરપ્રાઇઝ 11 · રોમેન્ટિક ગુલાબનો બગીચો 🌹</div>
       <div class="garden-scene">
         <div class="rose-plant" id="rose1" onclick="tapRose(1)">🌹</div>
         <div class="rose-plant" id="rose2" onclick="tapRose(2)">🌹</div>
         <div class="rose-plant" id="rose3" onclick="tapRose(3)">🌹</div>
       </div>
-      <p class="lead tap-note" id="roseHint">Tap the 3 roses to bloom the garden</p>
+      <p class="lead tap-note" id="roseHint">બગીચો ખીલવવા માટે 3 ગુલાબ પર દબાવો</p>
       <div id="bigRose" class="hidden big-rose">🌹</div>
-      <div id="gardenFinalMsg" class="hidden script" style="font-size:2.5rem;">Every rose reminds me how special you are. ❤️</div>
-      <button class="btn alt hidden" id="roseNext" onclick="next()">Next Surprise ➜</button>
+      <div id="gardenFinalMsg" class="hidden script" style="font-size:2.8rem;">દરેક ગુલાબ મને યાદ અપાવે છે કે તું કેટલી ખાસ છે. ❤️</div>
+      <button class="btn alt hidden" id="roseNext" onclick="next()">આગળની સરપ્રાઇઝ ➜</button>
     </div>
   </section>
 
   <!-- Surprise 12: Navratri Garba Celebration -->
   <section class="screen" data-n="12" data-interactive="true">
     <div class="inner">
-      <div class="chapter">surprise 12 · Navratri Garba Celebration 💃</div>
+      <div class="chapter">સરપ્રાઇઝ 12 · નવરાત્રી ગરબાની ઉજવણી 💃</div>
       <div class="garba-scene">
         <div class="toran">🍃🌼🍃🌼🍃</div>
         <div class="garba-circle" id="garbaCircle">
@@ -624,16 +632,16 @@
           <div class="garba-char char-devang">👦🏻</div>
         </div>
       </div>
-      <button class="btn" id="garbaBtn" onclick="startGarba()">Let's Dance Garba 💃</button>
-      <div id="garbaMsg" class="hidden script" style="font-size:2.2rem; line-height: 1.2;">Rutvi, let's make beautiful memories together, one dance at a time ❤️</div>
-      <button class="btn alt hidden" id="garbaNext" onclick="next()">Next Surprise ➜</button>
+      <button class="btn" id="garbaBtn" onclick="startGarba()">ચાલ, સાથે ગરબા રમીએ! 💃</button>
+      <div id="garbaMsg" class="hidden script" style="font-size:2.2rem; line-height: 1.3;">રંગબેરંગી રોશની અને ખુશીઓથી ભરેલી આ સુંદર પળ તારા માટે.<br>આપણે સાથે મળીને સુંદર યાદો બનાવીએ. ❤️</div>
+      <button class="btn alt hidden" id="garbaNext" onclick="next()">આગળની સરપ્રાઇઝ ➜</button>
     </div>
   </section>
 
   <!-- Surprise 13: Magical Birthday Cake -->
   <section class="screen" data-n="13" data-interactive="true">
     <div class="inner card">
-      <div class="chapter">surprise 13 · Magical Birthday Cake 🎂</div>
+      <div class="chapter">સરપ્રાઇઝ 13 · જાદુઈ Birthday કેક 🎂</div>
       <div class="cake-container">
         <div class="cake-layer bottom"></div>
         <div class="cake-layer top"></div>
@@ -641,17 +649,17 @@
         <div class="candle c2" onclick="blowCandle(2)"><div class="flame" id="flame2"></div></div>
         <div class="candle c3" onclick="blowCandle(3)"><div class="flame" id="flame3"></div></div>
       </div>
-      <p class="lead tap-note" id="cakeHint">Tap all candles to extinguish them</p>
-      <div id="cakeMsg1" class="hidden script" style="font-size:3rem;">Make a beautiful wish, Rutvi ✨</div>
-      <div id="cakeMsg2" class="hidden lead" style="font-size:1.2rem; color:#d93670; font-weight:bold;">May your birthday bring you endless happiness and smiles ❤️</div>
-      <button class="btn alt hidden" id="cakeNext" onclick="next()">Next Surprise ➜</button>
+      <p class="lead tap-note" id="cakeHint">બધી મીણબત્તીઓ ઓલવવા માટે તેના પર દબાવો</p>
+      <div id="cakeMsg1" class="hidden script" style="font-size:3rem;">એક સરસ મનોકામના કર, Rutvi ✨</div>
+      <div id="cakeMsg2" class="hidden lead" style="font-size:1.3rem; color:#d93670; font-weight:bold;">તને હંમેશાં જીવનમાં સુખ, શાંતિ અને સફળતા મળે ❤️</div>
+      <button class="btn alt hidden" id="cakeNext" onclick="next()">આગળની સરપ્રાઇઝ ➜</button>
     </div>
   </section>
 
   <!-- Surprise 14: Secret Love Letter -->
   <section class="screen" data-n="14" data-interactive="true">
     <div class="inner">
-      <div class="chapter">surprise 14 · Secret Love Letter 💌</div>
+      <div class="chapter">સરપ્રાઇઝ 14 · એક ખાનગી પ્રેમપત્ર 💌</div>
       <div class="env-container" id="envContainer" onclick="openEnvelope()">
         <div class="css-envelope">
           <div class="env-flap"></div>
@@ -659,11 +667,11 @@
           <div class="wax-seal">❤️</div>
         </div>
       </div>
-      <p class="lead tap-note" id="envHint">Tap the seal to open your letter</p>
+      <p class="lead tap-note" id="envHint">તારો પ્રેમપત્ર વાંચવા માટે સીલ પર દબાવો</p>
       <div class="secret-paper" id="secretPaper">
         <p class="letter" id="secretLetterText"></p>
       </div>
-      <button class="btn alt hidden" id="letterNext" onclick="next()">Final Surprise ➜</button>
+      <button class="btn alt hidden" id="letterNext" onclick="next()">અંતિમ સરપ્રાઇઝ ➜</button>
     </div>
   </section>
 
@@ -672,15 +680,16 @@
     <div class="finale-content">
       <div class="finale-heart-container" id="finaleHeart" onclick="triggerFinale()">
         <div class="big-glowing-heart">💖</div>
-        <div class="tap-hint">Tap my heart</div>
+        <div class="tap-hint">મારા હૃદય પર દબાવ</div>
       </div>
       <div id="finaleTexts" class="finale-texts hidden">
         <div class="f-text" id="ft1">Rutvi ❤️</div>
-        <div class="f-text" id="ft2">You are truly special.</div>
-        <div class="f-text" id="ft3">I hope this little journey made you smile.</div>
-        <div class="f-text" id="ft4">Happy Birthday, My Rutvi! 🎂💖</div>
-        <div class="f-text" id="ft5">With all my love,<br>Devang 💌</div>
-        <button class="btn f-btn" id="ftBtn" onclick="show(0)">Replay Our 15 Surprises ↻</button>
+        <div class="f-text" id="ft2">તું મારા માટે ખૂબ જ ખાસ છે.</div>
+        <div class="f-text" id="ft3">આ નાનકડી સફરે તારા ચહેરા પર સ્મિત લાવ્યું હોય એવી આશા છે.</div>
+        <div class="f-text" id="ft4">Happy Birthday, મારી વહાલી Rutvi! 🎂💖</div>
+        <div class="f-text" id="ft5">Love You, Rutvi ❤️</div>
+        <div class="f-text" id="ft6">ખૂબ બધા પ્રેમ સાથે,<br>તારો Devang 💌</div>
+        <button class="btn f-btn" id="ftBtn" onclick="show(0)">આપણી 15 સરપ્રાઇઝ ફરીથી માણીએ ❤️</button>
       </div>
     </div>
   </section>
@@ -729,7 +738,7 @@
           nav.classList.add('hidden');
         } else {
           nav.classList.remove('hidden');
-          counter.textContent = `Surprise ${current} of 15`;
+          counter.textContent = `15 માંથી સરપ્રાઇઝ ${current}`;
           progress.style.width = `${(current / 15) * 100}%`;
         }
         
@@ -766,7 +775,7 @@
 
       window.togglePause = function () {
         isPaused = !isPaused;
-        pauseBtn.textContent = isPaused ? 'Play ▶' : 'Pause ⏸';
+        pauseBtn.textContent = isPaused ? 'ચાલુ કરો ▶' : 'થોભો ⏸';
         if (!isPaused && !isInteractive && current > 0 && current < 15) {
           startTimer();
         }
@@ -833,17 +842,17 @@
       }
 
       // S4 Letter
-      const msg1 = `My dearest Rutvi, my Jaan 💗\n\nHappy Birthday to the girl who has a very special place in my heart.\n\nSometimes I wish I could show you how beautiful you are through my eyes. Maybe then you'd understand why your smile stays in my mind, why the smallest message from you can brighten my mood, and why even an ordinary moment feels a little more magical when it has you in it.\n\nRutvi, I hope you never forget how precious you are. You deserve gentle days, genuine happiness, dreams that come true, and love that makes you feel safe and appreciated. On days when you feel tired or doubt yourself, I hope you remember that you are capable of so much and that your feelings matter.\n\nI can't promise that every day will be perfect. But I can promise to keep trying to understand you, to listen with care, to cheer for your dreams, to laugh with you over silly things, and to treasure the little memories we make. I want us to keep growing, learning, and choosing kindness with each other.\n\nIf I could wrap up one gift for you, it would be the ability to see yourself the way I see you: special, lovable, wonderfully unique, and worth celebrating—not just today, but every single day.\n\nThank you for being Rutvi. Thank you for the smiles, the little moments, and all the beautiful memories still waiting for us.\n\nHappy Birthday, my beautiful girl. May your wishes find their way to you, may your heart feel light, and may this new chapter be full of magic.\n\nWith a thousand hugs, endless hearts, and so much love,\nYour Devang 💖`;
+      const msg1 = `મારી વહાલી Rutvi, મારી જાન 💗\n\nમારા હૃદયમાં એક ખૂબ જ ખાસ સ્થાન ધરાવતી છોકરીને Happy Birthday.\n\nક્યારેક મને એવું થાય છે કે કાશ હું તને મારી આંખોથી બતાવી શકું કે તું કેટલી સુંદર છે. કદાચ ત્યારે તને સમજાશે કે તારું સ્મિત મારા મનમાં કેમ છવાયેલું રહે છે, તારો એક નાનો મેસેજ પણ મારો મૂડ કેમ સારો કરી શકે છે, અને તારી સાથે વિતાવેલી એક સામાન્ય પળ પણ થોડી વધુ જાદુઈ કેમ લાગે છે.\n\nRutvi, હું આશા રાખું છું કે તું ક્યારેય ભૂલી ન જાય કે તું કેટલી અણમોલ છે. તું શાંત દિવસો, સાચી ખુશીઓ, પૂરા થતા સપનાઓ અને એવા પ્રેમ માટે લાયક છે જે તને સુરક્ષિત અને અમૂલ્ય અનુભવે. એવા દિવસો જ્યારે તું થાકી જાય અથવા તને તારા પર શંકા થાય, ત્યારે હું આશા રાખું છું કે તને યાદ રહે કે તારામાં ઘણી ક્ષમતા છે અને તારી લાગણીઓ ખૂબ જ મહત્વપૂર્ણ છે.\n\nહું એવું વચન નથી આપી શકતો કે દરેક દિવસ સંપૂર્ણ હશે. પણ હું હંમેશાં તને સમજવાનો પ્રયત્ન કરવાનું, કાળજીથી સાંભળવાનું, તારા સપનાઓ માટે પ્રોત્સાહિત કરવાનું, રમુજી વાતો પર તારી સાથે હસવાનું અને આપણે બનાવેલી નાની યાદોને સાચવી રાખવાનું વચન ચોક્કસ આપી શકું છું. હું ઈચ્છું છું કે આપણે સાથે મળીને આગળ વધીએ, શીખીએ અને એકબીજા સાથે ભલાઈથી વર્તીએ.\n\nજો હું તને એક ભેટ આપી શકતો હોત, તો એ ભેટ તને મારી નજરે જોવાની ક્ષમતા હોત: ખાસ, પ્રેમાળ, અદભૂત રીતે અનોખી, અને કદર કરવા લાયક—ફક્ત આજે જ નહીં, પરંતુ દરેક દિવસે.\n\nRutvi બનવા માટે તારો આભાર. તે સ્મિત, તે નાની પળો અને હજી આપણી રાહ જોતી બધી સુંદર યાદો માટે તારો આભાર.\n\nHappy Birthday, મારી સુંદર છોકરી. તારી બધી મનોકામનાઓ પૂરી થાય, તારું હૃદય હળવું રહે, અને આ નવો અધ્યાય જાદુથી ભરેલો રહે.\n\nહજારો આલિંગન, અસંખ્ય હૃદય અને ખૂબ બધા પ્રેમ સાથે,\nતારો Devang 💖`;
       function typeLetter1() {
         const el = document.getElementById('letter1'); if(el.dataset.done) return; el.dataset.done='1';
-        let i = 0; function tick() { el.textContent = msg1.slice(0,i); i+=3; if(i<=msg1.length) tTimer1=setTimeout(tick,20); else markDone(6000); } tick();
+        let i = 0; function tick() { el.textContent = msg1.slice(0,i); i+=1; if(i<=msg1.length) tTimer1=setTimeout(tick,20); else markDone(6000); } tick();
       }
 
       // S6 Wish
       window.makeWish = function() {
         document.getElementById('wishBtn').style.display = 'none';
         const txt = document.getElementById('wishText');
-        txt.textContent = '✨ May your wish come true, Rutvi. The universe has received a little extra love from Devang today! 💗';
+        txt.textContent = '✨ તારી મનોકામના પૂરી થાય, Rutvi. બ્રહ્માંડને આજે Devang તરફથી થોડો વધારાનો પ્રેમ મળ્યો છે! 💗';
         txt.classList.remove('hidden');
         confetti(55); markDone(4000);
       };
@@ -852,8 +861,8 @@
       window.answerQ = function(type) {
         document.getElementById('qBtns').style.display = 'none';
         const res = document.getElementById('responseQ');
-        if(type==='yes') { res.textContent = 'Then let’s make lovely memories, one day at a time! 💘'; confetti(65); }
-        else { res.textContent = 'Awww, sending you the biggest virtual hug, Rutvi! 🥹💗'; confetti(30); }
+        if(type==='yes') { res.textContent = 'તો ચાલ, આપણે રોજ એક સુંદર યાદ બનાવીએ! 💘'; confetti(65); }
+        else { res.textContent = 'ઓહો, તને શરમ આવે છે! Rutvi, તને સૌથી મોટું વર્ચ્યુઅલ હગ! 🥹💗'; confetti(30); }
         res.classList.remove('hidden');
         document.getElementById('qNext').classList.remove('hidden');
         markDone(4000);
@@ -930,7 +939,7 @@
       };
 
       // S14 Secret Letter
-      const msg2 = "My dearest Rutvi ❤️,\n\nToday is all about you, your smile, your happiness, and the wonderful person you are.\n\nI hope this little surprise brings a smile to your face. You deserve beautiful moments, kind people, and endless reasons to be happy.\n\nThank you for being the special person you are.\n\nHappy Birthday, Rutvi. Keep smiling and keep shining.\n\nWith love,\nYour Devang 💖";
+      const msg2 = "મારી વહાલી Rutvi ❤️,\n\nઆજનો દિવસ તારા માટે ખૂબ જ ખાસ છે. તારા જીવનમાં હંમેશાં ખુશીઓ રહે, તારા ચહેરા પર હાસ્ય રહે અને તારા બધા સુંદર સપનાં પૂરાં થાય એવી મારી દિલથી શુભેચ્છા.\n\nઆ નાનકડી સરપ્રાઇઝ તારા માટે મારા પ્રેમ અને લાગણીની એક સુંદર ભેટ છે.\n\nતું હંમેશાં ખુશ રહે અને જીવનમાં આગળ વધતી રહે.\n\nHappy Birthday, મારી વહાલી Rutvi! 🎂❤️\n\nખૂબ બધા પ્રેમ સાથે,\nતારો Devang 💌";
       window.openEnvelope = function() {
         const env = document.getElementById('envContainer');
         if(!env.classList.contains('open')) {
@@ -944,7 +953,7 @@
       };
       function typeLetter2() {
         const el = document.getElementById('secretLetterText'); if(el.dataset.done) return; el.dataset.done='1';
-        let i = 0; function tick() { el.textContent = msg2.slice(0,i); i+=2; if(i<=msg2.length) tTimer2=setTimeout(tick,30); else { document.getElementById('letterNext').classList.remove('hidden'); markDone(8000); } } tick();
+        let i = 0; function tick() { el.textContent = msg2.slice(0,i); i+=1; if(i<=msg2.length) tTimer2=setTimeout(tick,30); else { document.getElementById('letterNext').classList.remove('hidden'); markDone(8000); } } tick();
       }
 
       // S15 Finale
@@ -955,11 +964,11 @@
           setTimeout(() => {
             document.getElementById('finaleTexts').classList.remove('hidden');
             confetti(100);
-            const delays = [500, 2000, 4000, 6000, 8000];
-            for(let i=1;i<=5;i++) {
+            const delays = [500, 2000, 4000, 6000, 8000, 10000];
+            for(let i=1;i<=6;i++) {
               setTimeout(() => document.getElementById('ft'+i).classList.add('visible'), delays[i-1]);
             }
-            setTimeout(() => document.getElementById('ftBtn').classList.add('visible'), 10000);
+            setTimeout(() => document.getElementById('ftBtn').classList.add('visible'), 12000);
           }, 1000);
         }
       };
