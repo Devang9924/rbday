@@ -309,6 +309,26 @@
     .nav-counter { font-size: 0.8rem; color: #a35b7a; font-weight: bold; }
     .nav-btn-icon { padding: 6px 10px; font-family: sans-serif; } /* icons shouldn't use baloo */
 
+    /* --- Kiss Rain & Animations --- */
+    .kiss-counter { position: fixed; top: 60px; right: 15px; background: rgba(255,255,255,0.95); border: 2px solid #ff4f87; border-radius: 20px; padding: 5px 12px; font-weight: bold; color: #ff4f87; font-size: 0.85rem; box-shadow: 0 4px 15px rgba(255,79,135,0.2); z-index: 90; display: flex; align-items: center; gap: 5px; opacity: 1; transition: transform 0.3s; font-family: 'Baloo Bhai 2', sans-serif;}
+    .kiss-counter.hidden { display: none !important; }
+    .kiss-badge { background: #ff4f87; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.9rem; transition: transform 0.2s; display: inline-block;}
+    .kiss-toast { position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,255,255,0.95); padding: 15px 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(255,79,135,0.3); color: #d93670; font-family: 'Baloo Bhai 2', sans-serif; font-size: 1.4rem; font-weight: bold; z-index: 80; opacity: 0; pointer-events: none; text-align: center; white-space: nowrap; transition: opacity 0.5s, transform 0.5s; border: 2px solid #ffb6ce;}
+    .kiss-toast.show { opacity: 1; transform: translate(-50%, -60%); }
+    .kiss-btn { background: linear-gradient(135deg, #ff1744, #ff8a80); box-shadow: 0 8px 22px rgba(255,23,68,0.3); font-size: 1.1rem; margin: 10px 5px;}
+    
+    .couple-scene { display: flex; justify-content: center; align-items: center; gap: 40px; margin: 20px 0; height: 100px; position: relative; }
+    .char { font-size: 4.5rem; position: relative; opacity: 0; transform: translateY(20px); animation: charEnter 1s forwards; transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); z-index: 2;}
+    .char-d { animation-delay: 0.2s; }
+    .char-r { animation-delay: 0.4s; }
+    @keyframes charEnter { to { opacity: 1; transform: translateY(0); } }
+    .couple-scene.kissing .char-d { transform: translateX(20px) rotate(15deg); }
+    .couple-scene.kissing .char-r { transform: translateX(-20px) rotate(-15deg); }
+    .couple-heart { position: absolute; font-size: 3.5rem; top: -10px; opacity: 0; transform: scale(0); transition: all 1s; z-index: 10; filter: drop-shadow(0 0 15px rgba(255,79,135,0.8)); }
+    .couple-scene.kissing .couple-heart { opacity: 1; transform: scale(1) translateY(-25px); animation: heartbeat 1s infinite; }
+    .couple-msg { position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); color: #d93670; font-family: 'Baloo Bhai 2', sans-serif; font-weight: bold; opacity: 0; white-space: nowrap; transition: opacity 1s; font-size: 1.2rem;}
+    .couple-scene.kissing .couple-msg { opacity: 1; transition-delay: 1s; }
+
     /* --- Animations --- */
     @keyframes screenIn { from { opacity: 0; transform: translateY(13px) scale(.99) } to { opacity: 1; transform: none } }
     @keyframes floatUp { 0% { transform: translate3d(0, 0, 0) rotate(0); opacity: 0 } 12% { opacity: .45 } 100% { transform: translate3d(16px, -115vh, 0) rotate(35deg); opacity: 0 } }
@@ -405,10 +425,10 @@
     .big-glowing-heart { font-size: 7rem; animation: heartbeat 1.2s infinite; filter: drop-shadow(0 0 40px rgba(255,79,135,0.8)); margin-bottom: 20px;}
     .tap-hint { color: #ffb6ce; font-size: 1.2rem; font-weight: bold; animation: pulseOpacity 2s infinite; letter-spacing: 2px;}
     .finale-heart-container.expand { transform: translate(-50%, -50%) scale(50); opacity: 0; pointer-events: none; }
-    .finale-texts { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 30; gap: 20px; padding: 20px;}
-    .f-text { font-family: 'Baloo Bhai 2', sans-serif; font-size: clamp(1.8rem, 7vw, 3.2rem); color: #fff; text-shadow: 0 0 20px #ff4f87; opacity: 0; transition: opacity 1.5s, transform 1.5s; transform: translateY(20px); text-align: center; margin: 5px 0;}
+    .finale-texts { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 30; gap: 15px; padding: 20px;}
+    .f-text { font-family: 'Baloo Bhai 2', sans-serif; font-size: clamp(1.6rem, 6vw, 3rem); color: #fff; text-shadow: 0 0 20px #ff4f87; opacity: 0; transition: opacity 1.5s, transform 1.5s; transform: translateY(20px); text-align: center; margin: 0;}
     .f-text.visible { opacity: 1; transform: translateY(0); }
-    .f-btn { opacity: 0; transition: opacity 1s; margin-top: 40px; transform: scale(1.2); }
+    .f-btn { opacity: 0; transition: opacity 1s; margin-top: 20px; transform: scale(1.1); }
     .f-btn.visible { opacity: 1; }
     @keyframes pulseOpacity { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
@@ -445,6 +465,10 @@
     </div>
   </div>
 
+  <div class="kiss-counter hidden" id="kissCounter">
+    Devang તરફથી Rutvi માટે 💋 <span class="kiss-badge" id="kCount">0</span>
+  </div>
+
   <div id="effects" aria-hidden="true"></div>
   <div class="night-sky"></div>
 
@@ -473,12 +497,19 @@
     </div>
   </section>
 
-  <!-- Surprise 2: Original Ch 1 -->
+  <!-- Surprise 2: Cartoon Kiss 1 -->
   <section class="screen" data-n="2">
     <div class="inner card">
       <div class="chapter">સરપ્રાઇઝ 02 · તારો દિવસ, તારો જાદુ</div>
       <div class="script">Happy Birthday,<br>Rutvi! 🎂</div>
-      <div class="photo-frame" aria-label="A heart for Rutvi">🎀💗</div>
+      
+      <div class="couple-scene" id="couple2">
+        <div class="char char-d">👦🏻</div>
+        <div class="couple-heart">💖</div>
+        <div class="char char-r">👧🏻</div>
+        <div class="couple-msg">Happy Birthday! 😘</div>
+      </div>
+
       <p class="lead">આ દિવસે, દુનિયા વધુ સુંદર બની ગઈ કારણ કે <b>તું</b> અહીં આવી. અને ક્યાંક રસ્તામાં, મારી દુનિયા વધુ સુંદર બની ગઈ કારણ કે મને તું મળી. 🌷</p>
       <p class="lead">આજે, દરેક નાનકડી ચમક તારા માટે છે, દરેક હૃદય તારું નામ લે છે, અને મારી દરેક મનોકામનામાં થોડીક <b>Rutvi</b> છે. ✨</p>
       <button class="btn" onclick="next()">આગળ જોતી રહે, જાન →</button>
@@ -497,6 +528,7 @@
         <div class="moment">😂 <b>તારી રમુજી વાતો</b><br>હાસ્ય, મસ્તી અને એ નાની પળો જે હું ફરીથી જીવવા માંગુ છું.</div>
         <div class="moment">💗 <b>ફક્ત તું</b><br>મારા માટે ખાસ બનવા તારે સંપૂર્ણ થવાની જરૂર નથી. તારે બસ Rutvi બનવાની જરૂર છે.</div>
       </div>
+      <button class="btn kiss-btn" onclick="interactiveKiss(this)">Rutvi, એક Kiss તો બને છે ને? 😘</button>
       <button class="btn" onclick="next()">હજુ ઘણું બધું છે, મારી જાન 💌</button>
     </div>
   </section>
@@ -523,6 +555,7 @@
         <div class="moment">🌷 તારી લાગણીઓનું સન્માન કરવા, તારા સપનાઓને સાથ આપવા અને તારા સુંદર હૃદયની કદર કરવા.</div>
         <div class="moment">💞 હંમેશાં ભલાઈ, પ્રામાણિકતા અને આપણા સંબંધને પસંદ કરવા—દરેક નાની પળમાં.</div>
       </div>
+      <button class="btn kiss-btn" onclick="interactiveKiss(this)">Rutvi, એક Kiss તો બને છે ને? 😘</button>
       <button class="btn" onclick="next()">આગળની સરપ્રાઇઝ ✨</button>
     </div>
   </section>
@@ -556,15 +589,23 @@
     </div>
   </section>
 
-  <!-- Surprise 8: Original Ch 7 (Old Finale, Now Middle) -->
+  <!-- Surprise 8: Cartoon Kiss 2 -->
   <section class="screen" data-n="8">
     <div class="inner card">
       <div class="chapter">સરપ્રાઇઝ 08 · પ્રેમથી બનાવેલ</div>
-      <div class="script">Happy Birthday,<br>મારી વહાલી Rutvi! 🎂</div>
-      <div class="big-heart">❤️</div>
+      
+      <div class="couple-scene" id="couple8" style="transform: scale(1.1); margin: 30px 0;">
+        <div class="char char-d">👦🏻</div>
+        <div class="couple-heart">💖</div>
+        <div class="char char-r">👧🏻</div>
+        <div class="couple-msg">Love You Forever ❤️</div>
+      </div>
+
       <p class="lead">આશા છે કે આ વર્ષે જ્યારે તને શાંતિની જરૂર હોય ત્યારે શાંતિ મળે, મુશ્કેલ સમયમાં હિંમત મળે, એવા લોકો મળે જે તારા પ્રકાશની કદર કરે અને હસવાના હજારો નાના કારણો મળે.</p>
-      <h2 class="script" style="font-size:clamp(2rem,7vw,3.2rem)">તું મારું સૌથી મનપસંદ સ્વાગત છે, મારો સૌથી સુંદર વિચાર છે અને મારા હૃદયનો એક ખૂબ જ ખાસ હિસ્સો છે. 💗</h2>
+      <h2 class="script" style="font-size:clamp(1.8rem,6vw,2.8rem)">તું મારું સૌથી મનપસંદ સ્વાગત છે, મારો સૌથી સુંદર વિચાર છે અને મારા હૃદયનો એક ખૂબ જ ખાસ હિસ્સો છે. 💗</h2>
       <p class="lead"><b>આજે અને હંમેશાં ખૂબ બધા પ્રેમ સાથે — Devang. 💌</b></p>
+      <button class="btn kiss-btn" onclick="interactiveKiss(this)" style="margin-bottom: 10px;">Rutvi, એક Kiss તો બને છે ને? 😘</button>
+      <br>
       <button class="btn" onclick="next()">આગળ વધતી રહે, હજુ ઘણું બધું છે! ➜</button>
     </div>
   </section>
@@ -675,21 +716,27 @@
     </div>
   </section>
 
-  <!-- Surprise 15: The Grand Final Heart Reveal -->
+  <!-- Surprise 15: The Grand Final Heart Reveal with Kiss -->
   <section class="screen" data-n="15" data-interactive="true">
-    <div class="finale-content">
+    <div class="finale-content" style="width: 100%;">
       <div class="finale-heart-container" id="finaleHeart" onclick="triggerFinale()">
         <div class="big-glowing-heart">💖</div>
         <div class="tap-hint">મારા હૃદય પર દબાવ</div>
       </div>
       <div id="finaleTexts" class="finale-texts hidden">
-        <div class="f-text" id="ft1">Rutvi ❤️</div>
-        <div class="f-text" id="ft2">તું મારા માટે ખૂબ જ ખાસ છે.</div>
-        <div class="f-text" id="ft3">આ નાનકડી સફરે તારા ચહેરા પર સ્મિત લાવ્યું હોય એવી આશા છે.</div>
-        <div class="f-text" id="ft4">Happy Birthday, મારી વહાલી Rutvi! 🎂💖</div>
-        <div class="f-text" id="ft5">Love You, Rutvi ❤️</div>
-        <div class="f-text" id="ft6">ખૂબ બધા પ્રેમ સાથે,<br>તારો Devang 💌</div>
-        <button class="btn f-btn" id="ftBtn" onclick="show(0)">આપણી 15 સરપ્રાઇઝ ફરીથી માણીએ ❤️</button>
+        <div class="couple-scene" id="couple15" style="margin-bottom: 20px; transform: scale(1.3);">
+          <div class="char char-d">👦🏻</div>
+          <div class="couple-heart">💖</div>
+          <div class="char char-r">👧🏻</div>
+        </div>
+        
+        <div class="f-text" id="ft1">Happy Birthday Rutvi ❤️</div>
+        <div class="f-text" id="ft2" style="font-size: clamp(1.1rem, 5vw, 1.8rem); line-height: 1.5; color: #ffb6ce;">તું મારા જીવનની સૌથી ખાસ વ્યક્તિ છે.</div>
+        <div class="f-text" id="ft3" style="font-size: clamp(1.1rem, 5vw, 1.8rem); line-height: 1.5; color: #ffb6ce;">તારી સ્માઇલ મારી ખુશી છે, તારો સાથ મારી દુનિયા છે અને તારી સાથેની દરેક પળ મારા માટે ખાસ છે.</div>
+        <div class="f-text" id="ft4" style="margin-top: 10px;">Love You Forever, Rutvi 💋❤️</div>
+        <div class="f-text" id="ft5" style="font-size: clamp(1.1rem, 5vw, 1.8rem); color: #ffb6ce;">— Devang</div>
+        
+        <button class="btn f-btn kiss-btn" id="ftBtn" onclick="replayAll()" style="margin-top: 30px;">આપણી 15 સરપ્રાઇઝ ફરીથી માણીએ ❤️</button>
       </div>
     </div>
   </section>
@@ -712,6 +759,103 @@
       const TICK = 100;
       const DURATION = 10000;
 
+      // Variables for Kiss Rain & Counter
+      let kissCount = parseInt(localStorage.getItem('rbday_kisses') || '0');
+      let visitedSet = new Set(JSON.parse(localStorage.getItem('rbday_visited') || '[]'));
+      const kissCounterEl = document.getElementById('kissCounter');
+      const kCountEl = document.getElementById('kCount');
+      
+      kCountEl.textContent = kissCount;
+
+      function addKiss() {
+        kissCount++;
+        localStorage.setItem('rbday_kisses', kissCount);
+        kCountEl.textContent = kissCount;
+        kCountEl.style.transform = 'scale(1.5)';
+        setTimeout(() => kCountEl.style.transform = 'scale(1)', 300);
+      }
+
+      function markVisited(n) {
+        if(!visitedSet.has(n)) {
+          visitedSet.add(n);
+          localStorage.setItem('rbday_visited', JSON.stringify([...visitedSet]));
+          return true;
+        }
+        return false;
+      }
+
+      window.replayAll = function() {
+        visitedSet.clear();
+        localStorage.setItem('rbday_visited', '[]');
+        show(0);
+      };
+
+      const toastMessages = [
+        "Rutvi, તારા માટે એક મીઠી Kiss! 😘",
+        "મારી દરેક ખુશીનું નામ Rutvi ❤️",
+        "તું છે એટલે મારી દુનિયા સુંદર છે 🥰"
+      ];
+
+      function showKissToast(container) {
+        const t = document.createElement('div');
+        t.className = 'kiss-toast';
+        t.textContent = toastMessages[Math.floor(Math.random() * toastMessages.length)];
+        container.appendChild(t);
+        setTimeout(() => t.classList.add('show'), 100);
+        setTimeout(() => { 
+          t.classList.remove('show'); 
+          setTimeout(() => t.remove(), 500); 
+        }, 3500);
+      }
+
+      function kissRain(count) {
+        if (reduce) return;
+        const max = Math.min(count, 80);
+        const emojis = ['😘', '💋', '💖', '❤️', '🥰'];
+        for (let i = 0; i < max; i++) {
+          const el = document.createElement('span');
+          el.className = 'confetti';
+          el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+          el.style.setProperty('--x', Math.random() * 100 + 'vw');
+          el.style.setProperty('--size', (18 + Math.random() * 20) + 'px');
+          el.style.setProperty('--dur', (3 + Math.random() * 2.5) + 's');
+          document.body.appendChild(el);
+          setTimeout(() => el.remove(), 6000);
+        }
+      }
+
+      window.interactiveKiss = function(btn) {
+        addKiss();
+        kissRain(45);
+        
+        const responses = ["Awww! 😘", "Love you Rutvi! 💖", "So Sweet! 🥰"];
+        const origText = btn.textContent;
+        btn.textContent = responses[Math.floor(Math.random() * responses.length)];
+        btn.style.transform = 'scale(1.1)';
+        setTimeout(() => {
+          btn.textContent = origText;
+          btn.style.transform = 'scale(1)';
+        }, 2000);
+      };
+
+      window.triggerCoupleKiss = function(id) {
+        const scene = document.getElementById(id);
+        if(scene && !scene.classList.contains('kissing')) {
+          scene.classList.add('kissing');
+          setTimeout(() => {
+            addKiss();
+            kissRain(30);
+          }, 1000); // Wait for char movement
+        }
+      };
+
+      // Handle visibility pause
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden && !isPaused && !isInteractive && current > 0 && current < 15) {
+          togglePause(); // Auto pause timer when tab is hidden
+        }
+      });
+
       // Load saved progress
       let saved = localStorage.getItem('rbday_progress');
       if (saved) {
@@ -733,13 +877,26 @@
         localStorage.setItem('rbday_progress', current);
         window.scrollTo(0,0);
         
-        // Update Nav
+        // Update Nav & Kisses
         if (current === 0) {
           nav.classList.add('hidden');
+          kissCounterEl.classList.add('hidden');
         } else {
           nav.classList.remove('hidden');
+          kissCounterEl.classList.remove('hidden');
           counter.textContent = `15 માંથી સરપ્રાઇઝ ${current}`;
           progress.style.width = `${(current / 15) * 100}%`;
+          
+          if(current < 15) {
+             if (markVisited(current)) {
+                addKiss();
+             }
+             kissRain(25);
+             showKissToast(screens[current]);
+             
+             if (current === 2) setTimeout(() => triggerCoupleKiss('couple2'), 800);
+             if (current === 8) setTimeout(() => triggerCoupleKiss('couple8'), 800);
+          }
         }
         
         // Final screen styling
@@ -787,9 +944,7 @@
         if (!isPaused && current < 15) startTimer();
       }
 
-      // ----------------------------------------------------
       // Background Effects
-      // ----------------------------------------------------
       const effects = document.getElementById('effects');
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!reduce) {
@@ -817,22 +972,27 @@
         }
       };
 
-      // ----------------------------------------------------
       // Screen Specific Logic
-      // ----------------------------------------------------
       let tTimer1, tTimer2;
 
       function cleanupScreen(n) {
+        if (n === 2) { const s = document.getElementById('couple2'); if (s) s.classList.remove('kissing'); }
         if (n === 4) { clearTimeout(tTimer1); document.getElementById('letter1').textContent=''; document.getElementById('letter1').dataset.done=''; }
         if (n === 6) { document.getElementById('wishText').classList.add('hidden'); document.getElementById('wishBtn').style.display='inline-flex'; }
         if (n === 7) { document.getElementById('responseQ').classList.add('hidden'); document.getElementById('qBtns').style.display='block'; document.getElementById('qNext').classList.add('hidden'); }
+        if (n === 8) { const s = document.getElementById('couple8'); if (s) s.classList.remove('kissing'); }
         if (n === 9) { document.querySelector('.c-box').classList.remove('open'); document.getElementById('chocoMsg').classList.add('hidden'); document.getElementById('chocoNext').classList.add('hidden'); }
         if (n === 10) { document.querySelector('.css-teddy').classList.remove('hugging'); document.getElementById('hugHeart').classList.add('hidden'); document.getElementById('hugMsg').classList.add('hidden'); document.getElementById('hugBtn').style.display='inline-flex'; document.getElementById('hugNext').classList.add('hidden'); }
         if (n === 11) { document.querySelectorAll('.rose-plant').forEach(r => r.classList.remove('tapped')); document.getElementById('bigRose').classList.add('hidden'); document.getElementById('gardenFinalMsg').classList.add('hidden'); rosesTapped=0; document.getElementById('roseHint').classList.remove('hidden'); document.getElementById('roseNext').classList.add('hidden'); }
         if (n === 12) { document.getElementById('garbaCircle').classList.remove('dancing'); document.getElementById('garbaMsg').classList.add('hidden'); document.getElementById('garbaBtn').style.display='inline-flex'; document.getElementById('garbaNext').classList.add('hidden');}
         if (n === 13) { for(let i=1;i<=3;i++) document.getElementById('flame'+i).classList.remove('lit'); candlesLit=3; document.getElementById('cakeMsg1').classList.add('hidden'); document.getElementById('cakeMsg2').classList.add('hidden'); document.getElementById('cakeHint').classList.remove('hidden'); document.getElementById('cakeNext').classList.add('hidden'); }
         if (n === 14) { clearTimeout(tTimer2); document.getElementById('secretLetterText').textContent=''; document.getElementById('secretLetterText').dataset.done=''; document.getElementById('envContainer').classList.remove('open'); document.getElementById('secretPaper').classList.remove('open'); document.getElementById('envHint').classList.remove('hidden'); document.getElementById('letterNext').classList.add('hidden'); }
-        if (n === 15) { document.getElementById('finaleHeart').classList.remove('expand'); document.getElementById('finaleTexts').classList.add('hidden'); document.querySelectorAll('.f-text, .f-btn').forEach(el => el.classList.remove('visible')); }
+        if (n === 15) { 
+           document.getElementById('finaleHeart').classList.remove('expand'); 
+           document.getElementById('finaleTexts').classList.add('hidden'); 
+           document.querySelectorAll('.f-text, .f-btn').forEach(el => el.classList.remove('visible')); 
+           const s = document.getElementById('couple15'); if (s) s.classList.remove('kissing'); 
+        }
       }
 
       function initScreen(n) {
@@ -963,19 +1123,22 @@
           h.classList.add('expand');
           setTimeout(() => {
             document.getElementById('finaleTexts').classList.remove('hidden');
+            
+            triggerCoupleKiss('couple15');
+            kissRain(100);
             confetti(100);
-            const delays = [500, 2000, 4000, 6000, 8000, 10000];
-            for(let i=1;i<=6;i++) {
+            if (markVisited(15)) addKiss();
+            
+            const delays = [2000, 4500, 7500, 9500, 11000];
+            for(let i=1;i<=5;i++) {
               setTimeout(() => document.getElementById('ft'+i).classList.add('visible'), delays[i-1]);
             }
-            setTimeout(() => document.getElementById('ftBtn').classList.add('visible'), 12000);
+            setTimeout(() => document.getElementById('ftBtn').classList.add('visible'), 13000);
           }, 1000);
         }
       };
 
-      // ----------------------------------------------------
       // Music Player
-      // ----------------------------------------------------
       let audioCtx = null, musicOn = false, loopTimer = null, activeOsc = [];
       function stopMusic() { 
         musicOn = false; if (loopTimer) clearTimeout(loopTimer); 
