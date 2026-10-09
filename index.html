@@ -1076,9 +1076,6 @@
           Sfx.play('chime');
         } else {
           nav.classList.remove('hidden');
-          nav.classList.remove('collapsed');
-          navCollapsed = false;
-          if(navToggleBtn) navToggleBtn.textContent = '⬆️';
           counter.textContent = `15 માંથી સરપ્રાઇઝ ${current}`;
           progress.style.width = `${(current / 15) * 100}%`;
           Sfx.play('pop');
