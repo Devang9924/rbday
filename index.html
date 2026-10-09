@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -17,9 +16,7 @@
       --gold: #ffd985
     }
 
-    * {
-      box-sizing: border-box
-    }
+    * { box-sizing: border-box }
 
     html {
       min-height: 100%;
@@ -33,13 +30,16 @@
       background: radial-gradient(ellipse at 15% 15%, #ffe0eb 0, transparent 42%), radial-gradient(ellipse at 90% 80%, #ffe7d9 0, transparent 40%), linear-gradient(145deg, #fff8fb, #fff0f6);
       color: var(--ink);
       font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-      overflow-x: hidden
+      overflow-x: hidden;
+      transition: background 2s, color 2s;
+    }
+    
+    body.finale-mode {
+      background: #050514;
+      color: white !important;
     }
 
-    button {
-      font: inherit;
-      touch-action: manipulation
-    }
+    button { font: inherit; touch-action: manipulation }
 
     .screen {
       min-height: 100svh;
@@ -57,7 +57,7 @@
 
     .screen.active {
       display: flex;
-      animation: screenIn .55s ease both
+      animation: screenIn .65s ease both
     }
 
     .inner {
@@ -76,6 +76,7 @@
       margin: 13px 0 17px;
       text-wrap: balance
     }
+    .finale-mode .script { color: #ff83ad; text-shadow: 0 0 10px rgba(255,131,173,0.5); }
 
     .eyebrow {
       font-size: .68rem;
@@ -84,6 +85,7 @@
       color: #b55a80;
       font-weight: 800
     }
+    .finale-mode .eyebrow { color: #ffb6ce; }
 
     .lead {
       font-size: clamp(.96rem, 3.8vw, 1.08rem);
@@ -92,6 +94,7 @@
       max-width: 540px;
       margin: 17px auto 23px
     }
+    .finale-mode .lead { color: #e6c8d4; }
 
     .btn {
       display: inline-flex;
@@ -108,12 +111,11 @@
       font-weight: 750;
       box-shadow: 0 8px 22px #ff4f8738;
       transition: transform .2s, box-shadow .2s;
-      margin: 6px 3px
+      margin: 6px 3px;
+      cursor: pointer;
     }
 
-    .btn:active {
-      transform: scale(.96)
-    }
+    .btn:active { transform: scale(.96) }
 
     .btn.alt {
       background: #fff;
@@ -188,21 +190,10 @@
       animation: slideIn .55s both
     }
 
-    .moment:nth-child(2) {
-      animation-delay: .08s
-    }
-
-    .moment:nth-child(3) {
-      animation-delay: .16s
-    }
-
-    .moment:nth-child(4) {
-      animation-delay: .24s
-    }
-
-    .moment:nth-child(5) {
-      animation-delay: .32s
-    }
+    .moment:nth-child(2) { animation-delay: .08s }
+    .moment:nth-child(3) { animation-delay: .16s }
+    .moment:nth-child(4) { animation-delay: .24s }
+    .moment:nth-child(5) { animation-delay: .32s }
 
     .letter {
       white-space: pre-line;
@@ -220,69 +211,12 @@
       filter: drop-shadow(0 8px 16px #ff6b9b48)
     }
 
-    .progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #ff4f87, #ffd985);
-      width: 0;
-      z-index: 30;
-      transition: width .35s
-    }
-
-    .topline {
-      position: fixed;
-      top: 12px;
-      left: 12px;
-      right: 12px;
-      z-index: 31;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      pointer-events: none
-    }
-
-    .pill {
-      pointer-events: auto;
-      border: 1px solid #ffd3e1;
-      background: #ffffffeb;
-      color: #d93670;
-      border-radius: 999px;
-      padding: 9px 12px;
-      font-size: .78rem;
-      font-weight: 750;
-      box-shadow: 0 4px 15px #c04b7010
-    }
-
-    .counter {
-      font-size: .75rem;
-      color: #a35b7a;
-      background: #fff9;
-      border-radius: 999px;
-      padding: 8px 11px
-    }
-
-    .footer {
-      font-size: .78rem;
-      color: #b47a92;
-      margin-top: 20px
-    }
-
-    .tap-note {
-      font-size: .78rem;
-      color: #b47a92;
-      margin-top: 14px
-    }
-
-    .ring {
-      display: inline-block;
-      animation: ring 2.8s ease-in-out infinite
-    }
-
-    .hidden {
-      display: none !important
-    }
+    .footer { font-size: .78rem; color: #b47a92; margin-top: 20px }
+    .finale-mode .footer { color: #a18e9a; }
+    
+    .tap-note { font-size: .78rem; color: #b47a92; margin-top: 14px }
+    .ring { display: inline-block; animation: ring 2.8s ease-in-out infinite }
+    .hidden { display: none !important }
 
     #effects {
       position: fixed;
@@ -329,377 +263,744 @@
       margin: 12px 0
     }
 
-    @keyframes screenIn {
-      from {
-        opacity: 0;
-        transform: translateY(13px) scale(.99)
-      }
-
-      to {
-        opacity: 1;
-        transform: none
-      }
+    /* --- Navigation Bar --- */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(255,79,135,0.1);
+      transition: transform 0.4s;
     }
-
-    @keyframes floatUp {
-      0% {
-        transform: translate3d(0, 0, 0) rotate(0);
-        opacity: 0
-      }
-
-      12% {
-        opacity: .45
-      }
-
-      100% {
-        transform: translate3d(16px, -115vh, 0) rotate(35deg);
-        opacity: 0
-      }
+    .nav.hidden { transform: translateY(-100%); }
+    .progress-bg { width: 100%; height: 4px; background: #ffe0ea; }
+    .progress-bar { height: 100%; width: 0; background: linear-gradient(90deg, #ff4f87, #ffd985); transition: width 0.3s; }
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      gap: 5px;
     }
-
-    @keyframes twinkle {
-      from {
-        opacity: .25;
-        transform: scale(.7)
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1.18)
-      }
+    .nav-btn {
+      background: rgba(255,255,255,0.9);
+      border: 1px solid #ffd3e1;
+      border-radius: 20px;
+      padding: 6px 12px;
+      color: #d93670;
+      font-weight: bold;
+      font-size: 0.75rem;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(192,75,112,0.1);
+      white-space: nowrap;
     }
+    .nav-btn:active { transform: scale(0.95); }
+    .nav-counter { font-size: 0.75rem; color: #a35b7a; font-weight: bold; }
+    .nav-btn-icon { padding: 6px 10px; }
 
-    @keyframes bob {
+    /* --- Animations --- */
+    @keyframes screenIn { from { opacity: 0; transform: translateY(13px) scale(.99) } to { opacity: 1; transform: none } }
+    @keyframes floatUp { 0% { transform: translate3d(0, 0, 0) rotate(0); opacity: 0 } 12% { opacity: .45 } 100% { transform: translate3d(16px, -115vh, 0) rotate(35deg); opacity: 0 } }
+    @keyframes twinkle { from { opacity: .25; transform: scale(.7) } to { opacity: 1; transform: scale(1.18) } }
+    @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-2deg) } 50% { transform: translateY(-9px) rotate(2deg) } }
+    @keyframes heartbeat { 0%, 100% { transform: scale(1) } 15% { transform: scale(1.1) } 30% { transform: scale(1) } 45% { transform: scale(1.06) } }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-10px) } to { opacity: 1; transform: none } }
+    @keyframes spin { to { transform: rotate(360deg) } }
+    @keyframes halo { 0%, 100% { box-shadow: 0 10px 30px #f56a9c38 } 50% { box-shadow: 0 10px 40px #f56a9c70 } }
+    @keyframes ring { 0%, 100% { transform: rotate(-5deg) } 50% { transform: rotate(5deg) } }
+    @keyframes fall { to { transform: translate3d(20px, 110vh, 0) rotate(620deg); opacity: .1 } }
 
-      0%,
-      100% {
-        transform: translateY(0) rotate(-2deg)
-      }
+    /* --- New Surprises CSS --- */
+    
+    /* S9 Chocolate */
+    .choco-scene { position: relative; margin: 40px auto; min-height: 150px; }
+    .c-box { position: relative; width: 120px; height: 90px; margin: 0 auto; cursor: pointer; transform-style: preserve-3d; perspective: 600px; transition: transform 0.3s; }
+    .c-box:hover { transform: scale(1.05); }
+    .c-lid { position: absolute; width: 120px; height: 90px; background: #6b3e2b; transform-origin: top; transition: transform 0.8s; top: 0; border: 2px solid #4a2617; border-radius: 8px; z-index: 2; display: flex; align-items: center; justify-content: center; color: #ffd985; font-size: 2rem; }
+    .c-body { position: absolute; width: 120px; height: 80px; background: #5c3222; top: 10px; z-index: 1; border-radius: 8px; box-shadow: 0 15px 25px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .c-box.open .c-lid { transform: rotateX(120deg); }
+    
+    /* S10 Teddy */
+    .teddy-scene { min-height: 250px; margin: 20px 0; }
+    .css-teddy { position: relative; width: 140px; height: 160px; margin: 0 auto; animation: bounceIn 1s cubic-bezier(0.28, 0.84, 0.42, 1); cursor: pointer; }
+    .teddy-head { width: 70px; height: 60px; background: #c58356; border-radius: 50%; position: absolute; top: 15px; left: 35px; z-index: 3; }
+    .teddy-ear { width: 25px; height: 25px; background: #c58356; border-radius: 50%; position: absolute; top: 5px; z-index: 2; }
+    .teddy-ear.left { left: 25px; } .teddy-ear.right { right: 25px; }
+    .teddy-eye { width: 6px; height: 6px; background: #000; border-radius: 50%; position: absolute; top: 25px; animation: blink 3s infinite; }
+    .teddy-eye.left { left: 20px; } .teddy-eye.right { right: 20px; }
+    .teddy-nose { width: 10px; height: 7px; background: #000; border-radius: 50%; position: absolute; top: 38px; left: 30px; }
+    .teddy-body { width: 80px; height: 90px; background: #c58356; border-radius: 40px; position: absolute; top: 65px; left: 30px; z-index: 1; }
+    .teddy-arm { width: 25px; height: 60px; background: #b06f44; border-radius: 12px; position: absolute; top: 75px; z-index: 4; transform-origin: top center; transition: transform 0.5s; }
+    .teddy-arm.left { left: 15px; transform: rotate(30deg); animation: wave 2s infinite; }
+    .teddy-arm.right { right: 15px; transform: rotate(-30deg); }
+    .teddy-leg { width: 30px; height: 40px; background: #b06f44; border-radius: 20px; position: absolute; bottom: -5px; z-index: 2; }
+    .teddy-leg.left { left: 35px; } .teddy-leg.right { right: 35px; }
+    .hug-heart { position: absolute; top: 80px; left: 40px; font-size: 3.5rem; z-index: 3; animation: heartbeat 1s infinite; filter: drop-shadow(0 0 10px rgba(255,79,135,0.5));}
+    .css-teddy.hugging .teddy-arm.left { transform: rotate(-45deg); animation: none; }
+    .css-teddy.hugging .teddy-arm.right { transform: rotate(45deg); }
+    @keyframes bounceIn { 0% { transform: translateY(200px) scale(0.5); opacity: 0; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
+    @keyframes wave { 0%, 100% { transform: rotate(30deg); } 50% { transform: rotate(110deg); } }
+    @keyframes blink { 0%, 90%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
 
-      50% {
-        transform: translateY(-9px) rotate(2deg)
-      }
-    }
+    /* S11 Garden */
+    .garden-scene { display: flex; justify-content: center; gap: 30px; margin: 40px 0; height: 100px; align-items: flex-end; }
+    .rose-plant { font-size: 3.5rem; cursor: pointer; transform: translateY(50px) scale(0); animation: growUp 1.5s forwards; filter: grayscale(0.8); transition: filter 0.5s, transform 0.2s; }
+    .rose-plant:nth-child(2) { animation-delay: 0.5s; }
+    .rose-plant:nth-child(3) { animation-delay: 1s; }
+    .rose-plant.tapped { filter: grayscale(0); transform: translateY(0) scale(1.2) !important; pointer-events: none; }
+    @keyframes growUp { to { transform: translateY(0) scale(1); } }
+    @keyframes bloom { 0% { transform: scale(0) rotate(-20deg); opacity:0; } 100% { transform: scale(1) rotate(0); opacity:1; } }
+    .big-rose { font-size: 7rem; animation: bloom 2s forwards; margin: 20px 0; filter: drop-shadow(0 0 20px rgba(255,79,135,0.4));}
 
-    @keyframes heartbeat {
+    /* S12 Garba */
+    .garba-scene { position: relative; min-height: 250px; margin: 20px 0; }
+    .toran { font-size: 2rem; position: absolute; top: -10px; left: 0; right: 0; letter-spacing: 5px; animation: bob 3s infinite; }
+    .garba-circle { width: 180px; height: 180px; margin: 50px auto 30px; position: relative; }
+    .garba-char { font-size: 4.5rem; position: absolute; top: 50%; left: 50%; margin-top: -2.25rem; margin-left: -2.25rem; }
+    .char-rutvi { transform: translate(-60px, 0); }
+    .char-devang { transform: translate(60px, 0); }
+    .garba-circle.dancing { animation: spinCircle 4s linear infinite; }
+    .garba-circle.dancing .garba-char { animation: counterSpin 4s linear infinite; }
+    @keyframes spinCircle { to { transform: rotate(360deg); } }
+    @keyframes counterSpin { to { transform: rotate(-360deg); } }
 
-      0%,
-      100% {
-        transform: scale(1)
-      }
+    /* S13 Cake */
+    .cake-container { margin: 60px auto; width: 160px; height: 120px; position: relative; animation: scaleUp 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .cake-layer { position: absolute; background: #ff9a9e; border-radius: 10px; border: 2px solid #ff7b82; box-shadow: 0 4px 0 #e66a71 inset; }
+    .cake-layer.bottom { width: 160px; height: 60px; bottom: 0; left: 0; }
+    .cake-layer.top { width: 120px; height: 50px; bottom: 60px; left: 20px; background: #fecfef; border-color: #f7a8dc; box-shadow: 0 4px 0 #e091c5 inset;}
+    .candle { width: 12px; height: 35px; background: repeating-linear-gradient(45deg, #fff, #fff 4px, #ff4f87 4px, #ff4f87 8px); position: absolute; bottom: 110px; cursor: pointer; border-radius: 3px; z-index: 5;}
+    .candle.c1 { left: 40px; } .candle.c2 { left: 74px; } .candle.c3 { left: 108px; }
+    .flame { width: 16px; height: 24px; background: #ffcc00; border-radius: 50% 50% 20% 20%; position: absolute; top: -25px; left: -2px; box-shadow: 0 0 15px #ffcc00, 0 0 30px #ff9900; animation: flicker 0.5s infinite alternate; opacity: 0; transition: opacity 0.5s; pointer-events: none;}
+    .flame.lit { opacity: 1; }
+    @keyframes scaleUp { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+    @keyframes flicker { 0% { transform: scale(1) rotate(-2deg); opacity: 0.8; } 100% { transform: scale(1.1) rotate(2deg); opacity: 1; } }
 
-      15% {
-        transform: scale(1.1)
-      }
-
-      30% {
-        transform: scale(1)
-      }
-
-      45% {
-        transform: scale(1.06)
-      }
-    }
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateX(-10px)
-      }
-
-      to {
-        opacity: 1;
-        transform: none
-      }
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg)
-      }
-    }
-
-    @keyframes halo {
-
-      0%,
-      100% {
-        box-shadow: 0 10px 30px #f56a9c38
-      }
-
-      50% {
-        box-shadow: 0 10px 40px #f56a9c70
-      }
-    }
-
-    @keyframes ring {
-
-      0%,
-      100% {
-        transform: rotate(-5deg)
-      }
-
-      50% {
-        transform: rotate(5deg)
-      }
-    }
-
-    @keyframes fall {
-      to {
-        transform: translate3d(20px, 110vh, 0) rotate(620deg);
-        opacity: .1
-      }
-    }
+    /* S14 Letter */
+    .env-container { position: relative; width: 220px; height: 150px; margin: 40px auto; cursor: pointer; animation: bob 2s infinite; z-index: 5; transition: transform 1s, opacity 1s; }
+    .css-envelope { width: 100%; height: 100%; background: #e3879e; border-radius: 8px; position: relative; box-shadow: 0 15px 35px rgba(227, 135, 158, 0.4); }
+    .env-flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 110px solid transparent; border-right: 110px solid transparent; border-top: 85px solid #d16b86; transform-origin: top; transition: transform 0.8s; z-index: 3;}
+    .env-body { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 110px solid #f29bb1; border-right: 110px solid #f29bb1; border-bottom: 75px solid #e88fa6; border-top: 75px solid transparent; z-index: 2;}
+    .wax-seal { position: absolute; top: 65px; left: 90px; width: 40px; height: 40px; background: #c21a30; border-radius: 50%; z-index: 4; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; box-shadow: 0 4px 10px rgba(194, 26, 48, 0.5); }
+    .env-container.open .env-flap { transform: rotateX(180deg); z-index: 1; }
+    .env-container.open .wax-seal { opacity: 0; transition: opacity 0.3s; }
+    .secret-paper { width: 90%; max-width: 500px; background: #fffcf0; margin: -100px auto 0; border-radius: 5px; padding: 30px 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); position: relative; z-index: 1; max-height: 0; overflow: hidden; transition: max-height 2s ease, margin-top 2s ease; opacity: 0; font-family: "Courier New", monospace; color: #5c3222; text-align: left;}
+    .secret-paper.open { max-height: 1500px; margin-top: 20px; opacity: 1; z-index: 6; overflow: visible;}
+    
+    /* S15 Finale */
+    .night-sky { position: fixed; inset: 0; background: #050514; z-index: -1; opacity: 0; transition: opacity 2s; pointer-events: none; }
+    body.finale-mode .night-sky { opacity: 1; }
+    .finale-heart-container { text-align: center; transition: all 1.5s ease-in-out; cursor: pointer; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 20;}
+    .big-glowing-heart { font-size: 7rem; animation: heartbeat 1.2s infinite; filter: drop-shadow(0 0 40px rgba(255,79,135,0.8)); margin-bottom: 20px;}
+    .tap-hint { color: #ffb6ce; font-size: 1.2rem; font-weight: bold; animation: pulseOpacity 2s infinite; letter-spacing: 2px;}
+    .finale-heart-container.expand { transform: translate(-50%, -50%) scale(50); opacity: 0; pointer-events: none; }
+    .finale-texts { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 30; gap: 20px; padding: 20px;}
+    .f-text { font-family: "Brush Script MT", cursive; font-size: clamp(2rem, 8vw, 3.5rem); color: #fff; text-shadow: 0 0 20px #ff4f87; opacity: 0; transition: opacity 1.5s, transform 1.5s; transform: translateY(20px); text-align: center; margin: 10px 0;}
+    .f-text.visible { opacity: 1; transform: translateY(0); }
+    .f-btn { opacity: 0; transition: opacity 1s; margin-top: 40px; transform: scale(1.2); }
+    .f-btn.visible { opacity: 1; }
+    @keyframes pulseOpacity { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
     @media(min-width:600px) {
-      .screen {
-        padding-top: 78px
-      }
-
-      .list {
-        grid-template-columns: 1fr 1fr
-      }
-
-      .moment {
-        min-height: 112px
-      }
+      .screen { padding-top: 78px }
+      .list { grid-template-columns: 1fr 1fr }
+      .moment { min-height: 112px }
     }
-
     @media(max-width:360px) {
-      .screen {
-        padding: 66px 13px 22px
-      }
-
-      .btn {
-        padding: 12px 16px;
-        font-size: .92rem
-      }
-
-      .card {
-        padding: 19px 15px
-      }
-
-      .lead {
-        line-height: 1.7
-      }
-
-      .eyebrow {
-        letter-spacing: 1.2px
-      }
+      .screen { padding: 66px 13px 22px }
+      .btn { padding: 12px 16px; font-size: .92rem }
+      .card { padding: 19px 15px }
+      .lead { line-height: 1.7 }
+      .eyebrow { letter-spacing: 1.2px }
+      .nav-btn { padding: 5px 8px; font-size: 0.65rem; }
     }
-
     @media(prefers-reduced-motion:reduce) {
-
-      *,
-      *:before,
-      *:after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition: none !important
-      }
+      *, *:before, *:after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition: none !important }
     }
   </style>
 </head>
 
 <body>
-  <div class="progress" id="progress"></div>
-  <div class="topline"><span class="counter" id="counter">A little surprise · 1/8</span><button class="pill"
-      id="musicBtn" aria-label="Toggle gentle melody">♫ Music: off</button></div>
-  <div id="effects" aria-hidden="true"></div>
+  <!-- Navigation Bar -->
+  <div id="nav" class="nav hidden">
+    <div class="progress-bg"><div class="progress-bar" id="progress"></div></div>
+    <div class="nav-controls">
+      <button class="nav-btn nav-btn-icon" onclick="prev()" aria-label="Previous">⟨</button>
+      <button class="nav-btn" id="pauseBtn" onclick="togglePause()">Pause ⏸</button>
+      <span class="nav-counter" id="counter">Surprise 1 of 15</span>
+      <button class="nav-btn nav-btn-icon" onclick="replayCurrent()" aria-label="Replay">↺</button>
+      <button class="nav-btn nav-btn-icon" id="musicBtn" onclick="toggleMusic()" aria-label="Music">♫</button>
+      <button class="nav-btn" onclick="next()">Next ⟩</button>
+    </div>
+  </div>
 
+  <div id="effects" aria-hidden="true"></div>
+  <div class="night-sky"></div>
+
+  <!-- Intro Screen (Screen 0) -->
   <section class="screen active" data-n="0">
     <div class="inner">
-      <div class="eyebrow">a little universe made just for Rutvi ✨</div>
+      <div class="eyebrow">A cinematic journey begins</div>
+      <div class="big-heart" style="margin-bottom: 20px;">💖</div>
+      <h1 class="script">Happy Birthday,<br>My Rutvi ❤️</h1>
+      <p class="lead">Someone special has prepared 15 little surprises just for you...</p>
+      <p class="lead" style="font-weight: bold; color: #b55a80;">From Devang, with love 💌</p>
+      <button class="btn" onclick="next()" style="margin-top: 20px; font-size: 1.2rem; padding: 15px 30px;">Start Our Journey ❤️</button>
+      <div class="tap-note">🎀 Turn on sound and grab a comfy seat</div>
+    </div>
+  </section>
+
+  <!-- Surprise 1: Original Intro -->
+  <section class="screen" data-n="1">
+    <div class="inner">
+      <div class="eyebrow">surprise 01 · a little universe made just for Rutvi ✨</div>
       <div class="envelope">💌</div>
       <h1 class="script">Hey, Rutvi Jaan!</h1>
-      <p class="lead">Psst… Devang has a little surprise for the most special girl in his world. 💗<br>Take a deep
-        breath, smile a little, and open your birthday magic…</p>
+      <p class="lead">Psst… Devang has a little surprise for the most special girl in his world. 💗<br>Take a deep breath, smile a little, and open your birthday magic…</p>
       <button class="btn" onclick="next()">Open your surprise 💖</button>
-      <div class="tap-note">🎀 Best opened on your phone · sound is optional</div>
       <div class="footer">Made with all my heart by Devang ♡</div>
     </div>
   </section>
 
-  <section class="screen" data-n="1">
+  <!-- Surprise 2: Original Ch 1 -->
+  <section class="screen" data-n="2">
     <div class="inner card">
-      <div class="chapter">chapter 01 · your day, your magic</div>
+      <div class="chapter">surprise 02 · your day, your magic</div>
       <div class="script">Happy Birthday,<br>Rutvi! 🎂</div>
       <div class="photo-frame" aria-label="A heart for Rutvi">🎀💗</div>
-      <p class="lead">On this day, the world became more beautiful because <b>you</b> arrived in it. And somewhere along
-        the way, my world became more beautiful because I got you in it. 🌷</p>
-      <p class="lead">Today, every little sparkle is for you, every heart says your name, and every wish I make has a
-        little bit of <b>Rutvi</b> in it. ✨</p>
+      <p class="lead">On this day, the world became more beautiful because <b>you</b> arrived in it. And somewhere along the way, my world became more beautiful because I got you in it. 🌷</p>
+      <p class="lead">Today, every little sparkle is for you, every heart says your name, and every wish I make has a little bit of <b>Rutvi</b> in it. ✨</p>
       <button class="btn" onclick="next()">Keep opening, Jaan →</button>
     </div>
   </section>
 
-  <section class="screen" data-n="2">
+  <!-- Surprise 3: Original Ch 2 -->
+  <section class="screen" data-n="3">
     <div class="inner">
-      <div class="chapter">chapter 02 · my favourite things</div>
+      <div class="chapter">surprise 03 · my favourite things</div>
       <h2 class="script">Why you're so special 💕</h2>
       <div class="list">
         <div class="moment">🌸 <b>Your smile</b><br>It makes even an ordinary day feel like my favourite day.</div>
         <div class="moment">🥹 <b>Your eyes</b><br>They have a way of making me forget what I was about to say.</div>
         <div class="moment">🫶 <b>Your heart</b><br>Your kindness and your little ways mean more than you know.</div>
-        <div class="moment">😂 <b>Your silly side</b><br>The laughs, the teasing, the tiny moments I wish I could
-          replay.</div>
-        <div class="moment">💗 <b>Simply you</b><br>You don't have to be perfect to be precious to me. You just have to
-          be Rutvi.</div>
-      </div><button class="btn" onclick="next()">There's more, my love 💌</button>
+        <div class="moment">😂 <b>Your silly side</b><br>The laughs, the teasing, the tiny moments I wish I could replay.</div>
+        <div class="moment">💗 <b>Simply you</b><br>You don't have to be perfect to be precious to me. You just have to be Rutvi.</div>
+      </div>
+      <button class="btn" onclick="next()">There's more, my love 💌</button>
     </div>
   </section>
 
-  <section class="screen" data-n="3">
+  <!-- Surprise 4: Original Ch 3 (Interactive Typing) -->
+  <section class="screen" data-n="4" data-interactive="true">
     <div class="inner card">
-      <div class="chapter">chapter 03 · a message from Devang</div>
+      <div class="chapter">surprise 04 · a message from Devang</div>
       <h2 class="script">Open my heart 💌</h2>
-      <p class="letter" id="letter"></p>
+      <p class="letter" id="letter1"></p>
       <button class="btn" onclick="next()">I have more to tell you →</button>
     </div>
   </section>
 
-  <section class="screen" data-n="4">
+  <!-- Surprise 5: Original Ch 4 -->
+  <section class="screen" data-n="5">
     <div class="inner">
-      <div class="chapter">chapter 04 · little promises</div>
+      <div class="chapter">surprise 05 · little promises</div>
       <h2 class="script">For you, Rutvi 🤞</h2>
       <div class="list">
         <div class="moment">🌧️ To listen when you need someone, even when you don't know how to explain.</div>
-        <div class="moment">🌈 To celebrate your wins like they're my own and remind you of your strength on hard days.
-        </div>
-        <div class="moment">🧸 To keep making silly memories, sharing smiles, and finding reasons to laugh together.
-        </div>
-        <div class="moment">🌷 To respect your feelings, support your dreams, and never take your beautiful heart for
-          granted.</div>
+        <div class="moment">🌈 To celebrate your wins like they're my own and remind you of your strength on hard days.</div>
+        <div class="moment">🧸 To keep making silly memories, sharing smiles, and finding reasons to laugh together.</div>
+        <div class="moment">🌷 To respect your feelings, support your dreams, and never take your beautiful heart for granted.</div>
         <div class="moment">💞 To keep choosing kindness, honesty, and us—one little moment at a time.</div>
-      </div><button class="btn" onclick="next()">One more surprise, Jaan ✨</button>
+      </div>
+      <button class="btn" onclick="next()">Next Surprise ✨</button>
     </div>
   </section>
 
-  <section class="screen" data-n="5">
+  <!-- Surprise 6: Original Ch 5 (Interactive Wish) -->
+  <section class="screen" data-n="6" data-interactive="true">
     <div class="inner card">
-      <div class="chapter">chapter 05 · a tiny wish</div>
+      <div class="chapter">surprise 06 · a tiny wish</div>
       <div class="script">Make a wish, Rutvi 🌠</div>
       <div class="envelope">🎁</div>
-      <p class="lead">Close your eyes for a second, make your sweetest birthday wish, and tap below to send a sky full
-        of love your way.</p>
-      <button class="btn" onclick="wish()">Send my wish ✨💗</button>
-      <p id="wishText" class="lead" aria-live="polite"></p>
+      <p class="lead">Close your eyes for a second, make your sweetest birthday wish, and tap below to send a sky full of love your way.</p>
+      <button class="btn" id="wishBtn" onclick="makeWish()">Send my wish ✨💗</button>
+      <p id="wishText" class="lead hidden" aria-live="polite"></p>
       <button class="btn alt" onclick="next()">And now… →</button>
     </div>
   </section>
 
-  <section class="screen" data-n="6">
+  <!-- Surprise 7: Original Ch 6 (Interactive Question) -->
+  <section class="screen" data-n="7" data-interactive="true">
     <div class="inner">
-      <div class="chapter">chapter 06 · one little question</div>
+      <div class="chapter">surprise 07 · one little question</div>
       <div class="big-heart">💖</div>
       <h2 class="script">Rutvi, will you make many more beautiful memories with me?</h2>
-      <p class="lead">More laughter, more late conversations, more tiny adventures, more support for each other's
-        dreams, and more days where we give each other a reason to smile. 💞</p>
-      <button class="btn" onclick="celebrate()">Of course, Devang! 💘</button><button class="btn alt" id="shyBtn">I'm
-        shy 🙈</button>
-      <p id="response" aria-live="polite"></p>
+      <p class="lead">More laughter, more late conversations, more tiny adventures, more support for each other's dreams, and more days where we give each other a reason to smile. 💞</p>
+      <div id="qBtns">
+        <button class="btn" onclick="answerQ('yes')">Of course, Devang! 💘</button>
+        <button class="btn alt" onclick="answerQ('shy')">I'm shy 🙈</button>
+      </div>
+      <p id="responseQ" aria-live="polite" class="script hidden" style="font-size: 2rem;"></p>
+      <button class="btn alt hidden" id="qNext" onclick="next()">Next Surprise ➜</button>
     </div>
   </section>
 
-  <section class="screen" data-n="7">
+  <!-- Surprise 8: Original Ch 7 (Old Finale, Now Middle) -->
+  <section class="screen" data-n="8">
     <div class="inner card">
-      <div class="chapter">made with love · from Devang to Rutvi</div>
+      <div class="chapter">surprise 08 · made with love</div>
       <div class="script">Happy Birthday,<br>My Rutvi! 🎂</div>
       <div class="big-heart">❤️</div>
-      <p class="lead">I hope this year brings you peace when you need it, courage when things feel hard, people who
-        celebrate your light, and a thousand little reasons to smile.</p>
-      <h2 class="script" style="font-size:clamp(2.7rem,10vw,4.3rem)">You are my favourite hello, my sweetest thought,
-        and a very special part of my heart. 💗</h2>
+      <p class="lead">I hope this year brings you peace when you need it, courage when things feel hard, people who celebrate your light, and a thousand little reasons to smile.</p>
+      <h2 class="script" style="font-size:clamp(2.5rem,8vw,3.5rem)">You are my favourite hello, my sweetest thought, and a very special part of my heart. 💗</h2>
       <p class="lead"><b>With all my love, today and always — Devang. 💌</b></p>
-      <button class="btn" onclick="restart()">Watch our little love story again ↻</button><button class="btn alt"
-        onclick="confetti(55)">More hearts, please! 💞</button>
-      <div class="footer">Rutvi ♡ Devang · a tiny page, a whole lot of love</div>
+      <button class="btn" onclick="next()">Keep going, there's more! ➜</button>
+    </div>
+  </section>
+
+  <!-- Surprise 9: Chocolate Wonderland -->
+  <section class="screen" data-n="9" data-interactive="true">
+    <div class="inner card">
+      <div class="chapter">surprise 09 · Chocolate Wonderland 🍫</div>
+      <div class="choco-scene">
+        <div class="c-box" onclick="openChocoBox()">
+          <div class="c-lid">🎁</div>
+          <div class="c-body">💝</div>
+        </div>
+        <div id="chocoMsg" class="hidden script" style="margin-top:30px; font-size:2.5rem;">Life becomes sweeter with you, Rutvi ❤️</div>
+      </div>
+      <p class="lead tap-note">Tap the box to open your sweet surprise</p>
+      <button class="btn alt hidden" id="chocoNext" onclick="next()">Next Surprise ➜</button>
+    </div>
+  </section>
+
+  <!-- Surprise 10: Teddy Bear Hug -->
+  <section class="screen" data-n="10" data-interactive="true">
+    <div class="inner">
+      <div class="chapter">surprise 10 · Teddy Bear Hug 🧸</div>
+      <div class="teddy-scene">
+        <div class="css-teddy" onclick="giveHug()">
+          <div class="teddy-ear left"></div><div class="teddy-ear right"></div>
+          <div class="teddy-head"><div class="teddy-eye left"></div><div class="teddy-eye right"></div><div class="teddy-nose"></div></div>
+          <div class="teddy-body"></div>
+          <div class="teddy-arm left"></div><div class="teddy-arm right"></div>
+          <div class="teddy-leg left"></div><div class="teddy-leg right"></div>
+          <div class="hug-heart hidden" id="hugHeart">❤️</div>
+        </div>
+      </div>
+      <button class="btn" id="hugBtn" onclick="giveHug()">Tap for a Hug 🤗</button>
+      <div id="hugMsg" class="hidden script" style="margin-top:20px; font-size:2.2rem;">A big virtual hug from Devang to Rutvi 🤗</div>
+      <button class="btn alt hidden" id="hugNext" onclick="next()">Next Surprise ➜</button>
+    </div>
+  </section>
+
+  <!-- Surprise 11: Romantic Rose Garden -->
+  <section class="screen" data-n="11" data-interactive="true">
+    <div class="inner card">
+      <div class="chapter">surprise 11 · Romantic Rose Garden 🌹</div>
+      <div class="garden-scene">
+        <div class="rose-plant" id="rose1" onclick="tapRose(1)">🌹</div>
+        <div class="rose-plant" id="rose2" onclick="tapRose(2)">🌹</div>
+        <div class="rose-plant" id="rose3" onclick="tapRose(3)">🌹</div>
+      </div>
+      <p class="lead tap-note" id="roseHint">Tap the 3 roses to bloom the garden</p>
+      <div id="bigRose" class="hidden big-rose">🌹</div>
+      <div id="gardenFinalMsg" class="hidden script" style="font-size:2.5rem;">Every rose reminds me how special you are. ❤️</div>
+      <button class="btn alt hidden" id="roseNext" onclick="next()">Next Surprise ➜</button>
+    </div>
+  </section>
+
+  <!-- Surprise 12: Navratri Garba Celebration -->
+  <section class="screen" data-n="12" data-interactive="true">
+    <div class="inner">
+      <div class="chapter">surprise 12 · Navratri Garba Celebration 💃</div>
+      <div class="garba-scene">
+        <div class="toran">🍃🌼🍃🌼🍃</div>
+        <div class="garba-circle" id="garbaCircle">
+          <div class="garba-char char-rutvi">👧🏻</div>
+          <div class="garba-char char-devang">👦🏻</div>
+        </div>
+      </div>
+      <button class="btn" id="garbaBtn" onclick="startGarba()">Let's Dance Garba 💃</button>
+      <div id="garbaMsg" class="hidden script" style="font-size:2.2rem; line-height: 1.2;">Rutvi, let's make beautiful memories together, one dance at a time ❤️</div>
+      <button class="btn alt hidden" id="garbaNext" onclick="next()">Next Surprise ➜</button>
+    </div>
+  </section>
+
+  <!-- Surprise 13: Magical Birthday Cake -->
+  <section class="screen" data-n="13" data-interactive="true">
+    <div class="inner card">
+      <div class="chapter">surprise 13 · Magical Birthday Cake 🎂</div>
+      <div class="cake-container">
+        <div class="cake-layer bottom"></div>
+        <div class="cake-layer top"></div>
+        <div class="candle c1" onclick="blowCandle(1)"><div class="flame" id="flame1"></div></div>
+        <div class="candle c2" onclick="blowCandle(2)"><div class="flame" id="flame2"></div></div>
+        <div class="candle c3" onclick="blowCandle(3)"><div class="flame" id="flame3"></div></div>
+      </div>
+      <p class="lead tap-note" id="cakeHint">Tap all candles to extinguish them</p>
+      <div id="cakeMsg1" class="hidden script" style="font-size:3rem;">Make a beautiful wish, Rutvi ✨</div>
+      <div id="cakeMsg2" class="hidden lead" style="font-size:1.2rem; color:#d93670; font-weight:bold;">May your birthday bring you endless happiness and smiles ❤️</div>
+      <button class="btn alt hidden" id="cakeNext" onclick="next()">Next Surprise ➜</button>
+    </div>
+  </section>
+
+  <!-- Surprise 14: Secret Love Letter -->
+  <section class="screen" data-n="14" data-interactive="true">
+    <div class="inner">
+      <div class="chapter">surprise 14 · Secret Love Letter 💌</div>
+      <div class="env-container" id="envContainer" onclick="openEnvelope()">
+        <div class="css-envelope">
+          <div class="env-flap"></div>
+          <div class="env-body"></div>
+          <div class="wax-seal">❤️</div>
+        </div>
+      </div>
+      <p class="lead tap-note" id="envHint">Tap the seal to open your letter</p>
+      <div class="secret-paper" id="secretPaper">
+        <p class="letter" id="secretLetterText"></p>
+      </div>
+      <button class="btn alt hidden" id="letterNext" onclick="next()">Final Surprise ➜</button>
+    </div>
+  </section>
+
+  <!-- Surprise 15: The Grand Final Heart Reveal -->
+  <section class="screen" data-n="15" data-interactive="true">
+    <div class="finale-content">
+      <div class="finale-heart-container" id="finaleHeart" onclick="triggerFinale()">
+        <div class="big-glowing-heart">💖</div>
+        <div class="tap-hint">Tap my heart</div>
+      </div>
+      <div id="finaleTexts" class="finale-texts hidden">
+        <div class="f-text" id="ft1">Rutvi ❤️</div>
+        <div class="f-text" id="ft2">You are truly special.</div>
+        <div class="f-text" id="ft3">I hope this little journey made you smile.</div>
+        <div class="f-text" id="ft4">Happy Birthday, My Rutvi! 🎂💖</div>
+        <div class="f-text" id="ft5">With all my love,<br>Devang 💌</div>
+        <button class="btn f-btn" id="ftBtn" onclick="show(0)">Replay Our 15 Surprises ↻</button>
+      </div>
     </div>
   </section>
 
   <script>
     (function () {
       'use strict';
+      
       const screens = Array.from(document.querySelectorAll('.screen'));
-      const progress = document.getElementById('progress'), counter = document.getElementById('counter');
-      let current = 0, typingTimer = null;
-      const message = `My dearest Rutvi, my Jaan 💗
+      const progress = document.getElementById('progress');
+      const counter = document.getElementById('counter');
+      const nav = document.getElementById('nav');
+      const pauseBtn = document.getElementById('pauseBtn');
+      
+      let current = 0;
+      let timerId = null;
+      let isPaused = false;
+      let isInteractive = false;
+      let timeLeft = 10000; // 10 seconds
+      const TICK = 100;
+      const DURATION = 10000;
 
-Happy Birthday to the girl who has a very special place in my heart.
+      // Load saved progress
+      let saved = localStorage.getItem('rbday_progress');
+      if (saved) {
+        current = parseInt(saved, 10);
+        if (isNaN(current) || current < 0 || current >= screens.length) current = 0;
+      }
 
-Sometimes I wish I could show you how beautiful you are through my eyes. Maybe then you'd understand why your smile stays in my mind, why the smallest message from you can brighten my mood, and why even an ordinary moment feels a little more magical when it has you in it.
-
-Rutvi, I hope you never forget how precious you are. You deserve gentle days, genuine happiness, dreams that come true, and love that makes you feel safe and appreciated. On days when you feel tired or doubt yourself, I hope you remember that you are capable of so much and that your feelings matter.
-
-I can't promise that every day will be perfect. But I can promise to keep trying to understand you, to listen with care, to cheer for your dreams, to laugh with you over silly things, and to treasure the little memories we make. I want us to keep growing, learning, and choosing kindness with each other.
-
-If I could wrap up one gift for you, it would be the ability to see yourself the way I see you: special, lovable, wonderfully unique, and worth celebrating—not just today, but every single day.
-
-Thank you for being Rutvi. Thank you for the smiles, the little moments, and all the beautiful memories still waiting for us.
-
-Happy Birthday, my beautiful girl. May your wishes find their way to you, may your heart feel light, and may this new chapter be full of magic.
-
-With a thousand hugs, endless hearts, and so much love,
-Your Devang 💖`;
-      function show(n) {
+      window.show = function(n) {
+        if (n < 0) n = 0;
+        if (n >= screens.length) n = screens.length - 1;
+        
+        clearTimeout(timerId);
+        cleanupScreen(current);
+        
         screens[current].classList.remove('active');
-        current = n; screens[current].classList.add('active');
-        progress.style.width = ((current + 1) / screens.length * 100) + '%';
-        counter.textContent = 'A little surprise · ' + (current + 1) + '/' + screens.length;
-        window.scrollTo(0, 0);
-        if (n === 3) typeLetter();
-        if (n === 1 || n === 5 || n === 7) confetti(n === 7 ? 48 : 20);
+        current = n;
+        screens[current].classList.add('active');
+        
+        localStorage.setItem('rbday_progress', current);
+        window.scrollTo(0,0);
+        
+        // Update Nav
+        if (current === 0) {
+          nav.classList.add('hidden');
+        } else {
+          nav.classList.remove('hidden');
+          counter.textContent = `Surprise ${current} of 15`;
+          progress.style.width = `${(current / 15) * 100}%`;
+        }
+        
+        // Final screen styling
+        if (current === 15) document.body.classList.add('finale-mode');
+        else document.body.classList.remove('finale-mode');
+        
+        isInteractive = screens[current].dataset.interactive === 'true';
+        initScreen(current);
+        
+        timeLeft = DURATION;
+        if (!isPaused && !isInteractive && current > 0 && current < 15) {
+          startTimer();
+        }
+      };
+
+      window.next = function () { if (current < screens.length - 1) show(current + 1); };
+      window.prev = function () { if (current > 1) show(current - 1); else if (current === 1) show(0); };
+      window.replayCurrent = function () { show(current); };
+
+      function startTimer() {
+        clearTimeout(timerId);
+        function step() {
+          if (isPaused || isInteractive) return;
+          timeLeft -= TICK;
+          if (timeLeft <= 0) {
+            if (current > 0 && current < 15) next();
+          } else {
+            timerId = setTimeout(step, TICK);
+          }
+        }
+        timerId = setTimeout(step, TICK);
       }
-      window.next = function () { if (current < screens.length - 1) show(current + 1) };
-      window.restart = function () { if (typingTimer) clearTimeout(typingTimer); const el = document.getElementById('letter'); el.textContent = ''; el.dataset.done = ''; show(0) };
-      function typeLetter() {
-        const el = document.getElementById('letter'); if (el.dataset.done) return; el.dataset.done = '1';
-        let i = 0; function tick() { el.textContent = message.slice(0, i); i += 3; if (i <= message.length) typingTimer = setTimeout(tick, 22); else el.textContent = message }
-        tick();
+
+      window.togglePause = function () {
+        isPaused = !isPaused;
+        pauseBtn.textContent = isPaused ? 'Play ▶' : 'Pause ⏸';
+        if (!isPaused && !isInteractive && current > 0 && current < 15) {
+          startTimer();
+        }
+      };
+
+      function markDone(delayMs) {
+        isInteractive = false;
+        timeLeft = delayMs;
+        if (!isPaused && current < 15) startTimer();
       }
+
+      // ----------------------------------------------------
+      // Background Effects
+      // ----------------------------------------------------
       const effects = document.getElementById('effects');
-      const small = window.matchMedia('(max-width:480px)').matches;
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!reduce) {
-        const count = small ? 9 : 17;
-        for (let i = 0; i < count; i++) {
+        for (let i = 0; i < 15; i++) {
           const h = document.createElement('span'); h.className = 'floaty'; h.textContent = ['♡', '♥', '💕', '✧', '🌸'][i % 5];
-          h.style.setProperty('--x', (Math.random() * 100) + '%'); h.style.setProperty('--size', (12 + Math.random() * (small ? 14 : 22)) + 'px');
+          h.style.setProperty('--x', (Math.random() * 100) + '%'); h.style.setProperty('--size', (12 + Math.random() * 20) + 'px');
           h.style.setProperty('--dur', (12 + Math.random() * 15) + 's'); h.style.setProperty('--delay', (-Math.random() * 20) + 's'); effects.appendChild(h);
         }
-        for (let i = 0; i < (small ? 5 : 10); i++) {
-          const s = document.createElement('span'); s.className = 'spark'; s.textContent = '✦'; s.style.setProperty('--x', Math.random() * 96 + '%'); s.style.setProperty('--y', Math.random() * 90 + '%'); s.style.setProperty('--size', (10 + Math.random() * 12) + 'px'); s.style.setProperty('--dur', (1.8 + Math.random() * 2) + 's'); s.style.setProperty('--delay', (-Math.random() * 3) + 's'); effects.appendChild(s);
+        for (let i = 0; i < 8; i++) {
+          const s = document.createElement('span'); s.className = 'spark'; s.textContent = '✦'; 
+          s.style.setProperty('--x', Math.random() * 96 + '%'); s.style.setProperty('--y', Math.random() * 90 + '%'); 
+          s.style.setProperty('--size', (10 + Math.random() * 12) + 'px'); s.style.setProperty('--dur', (1.8 + Math.random() * 2) + 's'); s.style.setProperty('--delay', (-Math.random() * 3) + 's'); effects.appendChild(s);
         }
       }
-      window.confetti = function (count) {
+
+      window.confetti = function (count, charsList) {
         if (reduce) return;
-        const max = small ? Math.min(count, 45) : Math.min(count, 90);
-        const chars = ['💗', '💖', '💕', '✨', '🌸', '♥', '💘'];
+        const max = Math.min(count, 80);
+        const chars = charsList || ['💗', '💖', '💕', '✨', '🌸', '♥', '💘'];
         for (let i = 0; i < max; i++) {
           const e = document.createElement('span'); e.className = 'confetti'; e.textContent = chars[(Math.random() * chars.length) | 0];
-          e.style.setProperty('--x', Math.random() * 100 + 'vw'); e.style.setProperty('--size', (small ? 12 : 14) + Math.random() * 12 + 'px'); e.style.setProperty('--dur', (2.5 + Math.random() * 2.8) + 's');
+          e.style.setProperty('--x', Math.random() * 100 + 'vw'); e.style.setProperty('--size', (14 + Math.random() * 12) + 'px'); 
+          e.style.setProperty('--dur', (2.5 + Math.random() * 2.8) + 's');
           document.body.appendChild(e); setTimeout(() => e.remove(), 5600);
         }
       };
-      window.wish = function () { document.getElementById('wishText').textContent = '✨ May your wish come true, Rutvi. The universe has received a little extra love from Devang today! 💗'; confetti(55) };
-      window.celebrate = function () { document.getElementById('response').textContent = 'Then let’s make lovely memories, one day at a time! 💘'; confetti(65); setTimeout(() => show(7), 1700) };
-      document.getElementById('shyBtn').addEventListener('click', () => { document.getElementById('response').textContent = 'Awww, sending you the biggest virtual hug, Rutvi! 🥹💗'; confetti(25) });
-      // Tiny melody uses the phone's built-in audio engine; only starts after a tap.
+
+      // ----------------------------------------------------
+      // Screen Specific Logic
+      // ----------------------------------------------------
+      let tTimer1, tTimer2;
+
+      function cleanupScreen(n) {
+        if (n === 4) { clearTimeout(tTimer1); document.getElementById('letter1').textContent=''; document.getElementById('letter1').dataset.done=''; }
+        if (n === 6) { document.getElementById('wishText').classList.add('hidden'); document.getElementById('wishBtn').style.display='inline-flex'; }
+        if (n === 7) { document.getElementById('responseQ').classList.add('hidden'); document.getElementById('qBtns').style.display='block'; document.getElementById('qNext').classList.add('hidden'); }
+        if (n === 9) { document.querySelector('.c-box').classList.remove('open'); document.getElementById('chocoMsg').classList.add('hidden'); document.getElementById('chocoNext').classList.add('hidden'); }
+        if (n === 10) { document.querySelector('.css-teddy').classList.remove('hugging'); document.getElementById('hugHeart').classList.add('hidden'); document.getElementById('hugMsg').classList.add('hidden'); document.getElementById('hugBtn').style.display='inline-flex'; document.getElementById('hugNext').classList.add('hidden'); }
+        if (n === 11) { document.querySelectorAll('.rose-plant').forEach(r => r.classList.remove('tapped')); document.getElementById('bigRose').classList.add('hidden'); document.getElementById('gardenFinalMsg').classList.add('hidden'); rosesTapped=0; document.getElementById('roseHint').classList.remove('hidden'); document.getElementById('roseNext').classList.add('hidden'); }
+        if (n === 12) { document.getElementById('garbaCircle').classList.remove('dancing'); document.getElementById('garbaMsg').classList.add('hidden'); document.getElementById('garbaBtn').style.display='inline-flex'; document.getElementById('garbaNext').classList.add('hidden');}
+        if (n === 13) { for(let i=1;i<=3;i++) document.getElementById('flame'+i).classList.remove('lit'); candlesLit=3; document.getElementById('cakeMsg1').classList.add('hidden'); document.getElementById('cakeMsg2').classList.add('hidden'); document.getElementById('cakeHint').classList.remove('hidden'); document.getElementById('cakeNext').classList.add('hidden'); }
+        if (n === 14) { clearTimeout(tTimer2); document.getElementById('secretLetterText').textContent=''; document.getElementById('secretLetterText').dataset.done=''; document.getElementById('envContainer').classList.remove('open'); document.getElementById('secretPaper').classList.remove('open'); document.getElementById('envHint').classList.remove('hidden'); document.getElementById('letterNext').classList.add('hidden'); }
+        if (n === 15) { document.getElementById('finaleHeart').classList.remove('expand'); document.getElementById('finaleTexts').classList.add('hidden'); document.querySelectorAll('.f-text, .f-btn').forEach(el => el.classList.remove('visible')); }
+      }
+
+      function initScreen(n) {
+        if (n === 2 || n === 8) confetti(20);
+        if (n === 4) typeLetter1();
+        if (n === 13) setTimeout(() => { for(let i=1;i<=3;i++) document.getElementById('flame'+i).classList.add('lit'); }, 1000); 
+      }
+
+      // S4 Letter
+      const msg1 = `My dearest Rutvi, my Jaan 💗\n\nHappy Birthday to the girl who has a very special place in my heart.\n\nSometimes I wish I could show you how beautiful you are through my eyes. Maybe then you'd understand why your smile stays in my mind, why the smallest message from you can brighten my mood, and why even an ordinary moment feels a little more magical when it has you in it.\n\nRutvi, I hope you never forget how precious you are. You deserve gentle days, genuine happiness, dreams that come true, and love that makes you feel safe and appreciated. On days when you feel tired or doubt yourself, I hope you remember that you are capable of so much and that your feelings matter.\n\nI can't promise that every day will be perfect. But I can promise to keep trying to understand you, to listen with care, to cheer for your dreams, to laugh with you over silly things, and to treasure the little memories we make. I want us to keep growing, learning, and choosing kindness with each other.\n\nIf I could wrap up one gift for you, it would be the ability to see yourself the way I see you: special, lovable, wonderfully unique, and worth celebrating—not just today, but every single day.\n\nThank you for being Rutvi. Thank you for the smiles, the little moments, and all the beautiful memories still waiting for us.\n\nHappy Birthday, my beautiful girl. May your wishes find their way to you, may your heart feel light, and may this new chapter be full of magic.\n\nWith a thousand hugs, endless hearts, and so much love,\nYour Devang 💖`;
+      function typeLetter1() {
+        const el = document.getElementById('letter1'); if(el.dataset.done) return; el.dataset.done='1';
+        let i = 0; function tick() { el.textContent = msg1.slice(0,i); i+=3; if(i<=msg1.length) tTimer1=setTimeout(tick,20); else markDone(6000); } tick();
+      }
+
+      // S6 Wish
+      window.makeWish = function() {
+        document.getElementById('wishBtn').style.display = 'none';
+        const txt = document.getElementById('wishText');
+        txt.textContent = '✨ May your wish come true, Rutvi. The universe has received a little extra love from Devang today! 💗';
+        txt.classList.remove('hidden');
+        confetti(55); markDone(4000);
+      };
+
+      // S7 Question
+      window.answerQ = function(type) {
+        document.getElementById('qBtns').style.display = 'none';
+        const res = document.getElementById('responseQ');
+        if(type==='yes') { res.textContent = 'Then let’s make lovely memories, one day at a time! 💘'; confetti(65); }
+        else { res.textContent = 'Awww, sending you the biggest virtual hug, Rutvi! 🥹💗'; confetti(30); }
+        res.classList.remove('hidden');
+        document.getElementById('qNext').classList.remove('hidden');
+        markDone(4000);
+      };
+
+      // S9 Choco
+      window.openChocoBox = function() {
+        const box = document.querySelector('.c-box');
+        if(!box.classList.contains('open')) {
+          box.classList.add('open');
+          setTimeout(() => { document.getElementById('chocoMsg').classList.remove('hidden'); confetti(40, ['🍫','🍪','🍩','🍫']); document.getElementById('chocoNext').classList.remove('hidden'); markDone(5000); }, 1000);
+        }
+      };
+
+      // S10 Teddy
+      window.giveHug = function() {
+        const teddy = document.querySelector('.css-teddy');
+        if(!teddy.classList.contains('hugging')) {
+          teddy.classList.add('hugging');
+          document.getElementById('hugHeart').classList.remove('hidden');
+          document.getElementById('hugBtn').style.display = 'none';
+          setTimeout(() => { document.getElementById('hugMsg').classList.remove('hidden'); confetti(30); document.getElementById('hugNext').classList.remove('hidden'); markDone(5000); }, 800);
+        }
+      };
+
+      // S11 Garden
+      let rosesTapped = 0;
+      window.tapRose = function(id) {
+        const r = document.getElementById('rose'+id);
+        if(!r.classList.contains('tapped')) {
+          r.classList.add('tapped'); rosesTapped++;
+          if(rosesTapped === 3) {
+            document.getElementById('roseHint').classList.add('hidden');
+            setTimeout(() => {
+              document.getElementById('bigRose').classList.remove('hidden');
+              document.getElementById('gardenFinalMsg').classList.remove('hidden');
+              confetti(40, ['🌹','🥀','✨','❤️']);
+              document.getElementById('roseNext').classList.remove('hidden');
+              markDone(5000);
+            }, 800);
+          }
+        }
+      };
+
+      // S12 Garba
+      window.startGarba = function() {
+        document.getElementById('garbaCircle').classList.add('dancing');
+        document.getElementById('garbaBtn').style.display = 'none';
+        document.getElementById('garbaMsg').classList.remove('hidden');
+        confetti(50, ['✨','🎊','🎉','💖','💃']);
+        document.getElementById('garbaNext').classList.remove('hidden');
+        markDone(6000);
+      };
+
+      // S13 Cake
+      let candlesLit = 3;
+      window.blowCandle = function(id) {
+        const f = document.getElementById('flame'+id);
+        if(f.classList.contains('lit')) {
+          f.classList.remove('lit'); candlesLit--;
+          if(candlesLit === 0) {
+            document.getElementById('cakeHint').classList.add('hidden');
+            setTimeout(() => {
+              document.getElementById('cakeMsg1').classList.remove('hidden');
+              confetti(60);
+              setTimeout(() => { 
+                document.getElementById('cakeMsg2').classList.remove('hidden'); 
+                document.getElementById('cakeNext').classList.remove('hidden');
+                markDone(6000); 
+              }, 1500);
+            }, 500);
+          }
+        }
+      };
+
+      // S14 Secret Letter
+      const msg2 = "My dearest Rutvi ❤️,\n\nToday is all about you, your smile, your happiness, and the wonderful person you are.\n\nI hope this little surprise brings a smile to your face. You deserve beautiful moments, kind people, and endless reasons to be happy.\n\nThank you for being the special person you are.\n\nHappy Birthday, Rutvi. Keep smiling and keep shining.\n\nWith love,\nYour Devang 💖";
+      window.openEnvelope = function() {
+        const env = document.getElementById('envContainer');
+        if(!env.classList.contains('open')) {
+          env.classList.add('open');
+          document.getElementById('envHint').classList.add('hidden');
+          setTimeout(() => {
+            document.getElementById('secretPaper').classList.add('open');
+            setTimeout(typeLetter2, 1000);
+          }, 800);
+        }
+      };
+      function typeLetter2() {
+        const el = document.getElementById('secretLetterText'); if(el.dataset.done) return; el.dataset.done='1';
+        let i = 0; function tick() { el.textContent = msg2.slice(0,i); i+=2; if(i<=msg2.length) tTimer2=setTimeout(tick,30); else { document.getElementById('letterNext').classList.remove('hidden'); markDone(8000); } } tick();
+      }
+
+      // S15 Finale
+      window.triggerFinale = function() {
+        const h = document.getElementById('finaleHeart');
+        if(!h.classList.contains('expand')) {
+          h.classList.add('expand');
+          setTimeout(() => {
+            document.getElementById('finaleTexts').classList.remove('hidden');
+            confetti(100);
+            const delays = [500, 2000, 4000, 6000, 8000];
+            for(let i=1;i<=5;i++) {
+              setTimeout(() => document.getElementById('ft'+i).classList.add('visible'), delays[i-1]);
+            }
+            setTimeout(() => document.getElementById('ftBtn').classList.add('visible'), 10000);
+          }, 1000);
+        }
+      };
+
+      // ----------------------------------------------------
+      // Music Player
+      // ----------------------------------------------------
       let audioCtx = null, musicOn = false, loopTimer = null, activeOsc = [];
-      function stopMusic() { musicOn = false; if (loopTimer) clearTimeout(loopTimer); activeOsc.forEach(o => { try { o.stop() } catch (e) { } }); activeOsc = []; if (audioCtx) { try { audioCtx.close() } catch (e) { } audioCtx = null } document.getElementById('musicBtn').textContent = '♫ Music: off' }
+      function stopMusic() { 
+        musicOn = false; if (loopTimer) clearTimeout(loopTimer); 
+        activeOsc.forEach(o => { try { o.stop() } catch (e) { } }); activeOsc = []; 
+        if (audioCtx) { try { audioCtx.close() } catch (e) { } audioCtx = null } 
+        document.getElementById('musicBtn').textContent = '♫';
+        document.getElementById('musicBtn').style.opacity = '0.5';
+      }
       function startMusic() {
         try {
-          const AC = window.AudioContext || window.webkitAudioContext; if (!AC) { document.getElementById('musicBtn').textContent = 'Music unavailable'; return }
-          audioCtx = new AC(); musicOn = true; document.getElementById('musicBtn').textContent = '♫ Music: on';
+          const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+          audioCtx = new AC(); musicOn = true; 
+          document.getElementById('musicBtn').textContent = '♫';
+          document.getElementById('musicBtn').style.opacity = '1';
           const notes = [523.25, 659.25, 783.99, 659.25, 587.33, 698.46, 880, 698.46]; let idx = 0;
-          function note() { if (!musicOn || !audioCtx) return; const o = audioCtx.createOscillator(), g = audioCtx.createGain(); o.type = 'sine'; o.frequency.value = notes[idx++ % notes.length]; g.gain.setValueAtTime(.0001, audioCtx.currentTime); g.gain.exponentialRampToValueAtTime(.025, audioCtx.currentTime + .04); g.gain.exponentialRampToValueAtTime(.0001, audioCtx.currentTime + .3); o.connect(g); g.connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime + .32); activeOsc = [o]; loopTimer = setTimeout(note, 430) }
+          function note() { 
+            if (!musicOn || !audioCtx) return; 
+            const o = audioCtx.createOscillator(), g = audioCtx.createGain(); 
+            o.type = 'sine'; o.frequency.value = notes[idx++ % notes.length]; 
+            g.gain.setValueAtTime(.0001, audioCtx.currentTime); 
+            g.gain.exponentialRampToValueAtTime(.025, audioCtx.currentTime + .04); 
+            g.gain.exponentialRampToValueAtTime(.0001, audioCtx.currentTime + .3); 
+            o.connect(g); g.connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime + .32); 
+            activeOsc = [o]; loopTimer = setTimeout(note, 430) 
+          }
           note();
         } catch (e) { stopMusic() }
       }
-      document.getElementById('musicBtn').addEventListener('click', () => musicOn ? stopMusic() : startMusic());
-      progress.style.width = (100 / screens.length) + '%';
+      window.toggleMusic = function() { musicOn ? stopMusic() : startMusic(); };
+      document.getElementById('musicBtn').style.opacity = '0.5';
+
+      // Start initial screen
+      window.addEventListener('DOMContentLoaded', () => { show(current); });
     })();
   </script>
 </body>
-
 </html>
